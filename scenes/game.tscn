@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5ba33wxoyqo6"]
+[gd_scene load_steps=7 format=3 uid="uid://b5ba33wxoyqo6"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_an2dw"]
 [ext_resource type="PackedScene" uid="uid://dmwgm0hfwfju0" path="res://scenes/player.tscn" id="2_gf60o"]
+[ext_resource type="Script" path="res://scenes/volume_button.gd" id="3_q21bw"]
+[ext_resource type="Texture2D" uid="uid://2katttg876c8" path="res://assets/volume.png" id="3_re5ct"]
+[ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="5_sjodv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7lba"]
+atlas = ExtResource("3_re5ct")
+region = Rect2(0, 0, 12, 12)
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -11,5 +18,27 @@ script = ExtResource("1_an2dw")
 
 [node name="SpawnPlant" type="Timer" parent="."]
 autostart = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="UI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = SubResource("AtlasTexture_c7lba")
+script = ExtResource("3_q21bw")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_sjodv")
+autoplay = true
+bus = &"Music"
 
 [connection signal="timeout" from="SpawnPlant" to="." method="_on_spawn_plant_timeout"]

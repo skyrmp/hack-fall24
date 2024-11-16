@@ -6,7 +6,7 @@ extends Area2D
 const SCARE_COOLDOWN = 120
 var scare_cooldown_timer = 0
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		$Sprite.offset = Vector2(0, -16) + event.relative.normalized()
 	
