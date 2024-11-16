@@ -1,20 +1,18 @@
-
+class_name Critter
 extends Area2D
 
-class_name Critter
-
-var mental_hp: float
-var emo_resist: int
+var max_hp: int
+var current_hp: float = max_hp
 
 var speed: float
-var mhp_speed_ratio: float
+var hp_speed_ratio: float
 
 #var seed_drop_chance: int
 var possible_seeds: Array[int]
 
 func take_damage(damage: float) -> void:
-	mental_hp -= damage / emo_resist
-	speed = mental_hp * mhp_speed_ratio
+	current_hp -= damage
+	speed = current_hp * hp_speed_ratio
 
 
 
