@@ -1,7 +1,7 @@
 class_name Critter
 
-var current_mhp: float
-var mr: int
+var mental_hp: float
+var emo_resist: int
 
 var seed_drop_chance: int
 var possible_seeds: Array[int]
@@ -15,4 +15,4 @@ func _process(delta: float) -> void:
 	pass
 
 func damage(damage: float) -> void:
-	current_mhp -= damage / mr
+	mental_hp -= damage / emo_resist
