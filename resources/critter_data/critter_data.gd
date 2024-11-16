@@ -13,5 +13,5 @@ extends Resource
 @export var visit_amount_range: Array[int] = [2, 5]
 @export var visit_wait_range: Array[float] = [0.5, 3.0]
 
-#@export var sprite_frames: SpriteFrames
-#@export var seeds: Array[Seed]
+@export var sprite_frames: SpriteFrames
+@export var possible_plants: Array[PlantData]

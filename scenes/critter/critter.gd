@@ -7,12 +7,15 @@ enum {MOVING, VISITING, LEAVING, SCARED}
 
 @export var hp: float
 @export var speed: float
+@export var current_plant: PlantData
 
 var state: int:
 	set(value):
 		if value == LEAVING or value == SCARED:
 			_pick_target_edge_point()
-		elif value == VISITING:
+		if value == SCARED and critter_data.is_good:
+			_drop_seed()
+		if value == VISITING:
 			_visit_ratio = 0.0
 			_visit_duration = randf_range(critter_data.visit_wait_range[0], critter_data.visit_wait_range[1])
 		
@@ -101,7 +104,24 @@ func _run_away(delta: float) -> void:
 func _setup_critter_data() -> void:
 	hp = critter_data.max_hp
 	speed = critter_data.base_speed
+	$AnimatedSprite2D.sprite_frames = critter_data.sprite_frames
+	if not critter_data.possible_plants.is_empty():
+		current_plant = critter_data.possible_plants.pick_random()
 	_plots_to_visit = randi_range(critter_data.visit_amount_range[0], critter_data.visit_amount_range[1])
+
+
+func _drop_seed() -> void:
+	var plots = get_overlapping_areas()
+	
+	for i in range(plots.size() - 1, -1, -1):
+			if plots[i].plant:
+				plots.remove_at(i)
+	
+	if plots.is_empty():
+		return
+	
+	var plot: Plot = plots.pick_random()
+	plot.set_plant(current_plant)
 
 
 ## Picks a plot to go to. Also sets state
