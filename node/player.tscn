@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmwgm0hfwfju0"]
+
+[ext_resource type="Script" path="res://node/player.gd" id="1_n1vo3"]
+[ext_resource type="Texture2D" uid="uid://bjv7n8inguh10" path="res://asset/scarecrow.png" id="2_mwgig"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fi3ag"]
+radius = 8.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_n1vo3")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_mwgig")
+offset = Vector2(0, -16)
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fi3ag")
+
+[node name="Camera" type="Camera2D" parent="."]
