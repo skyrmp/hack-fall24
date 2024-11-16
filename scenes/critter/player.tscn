@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://fggr78hincjx"]
+
+[ext_resource type="Script" path="res://scenes/critter/critter.gd" id="1_nxr6r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ds2ia"]
+
+[node name="Critter" type="Area2D"]
+script = ExtResource("1_nxr6r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ds2ia")
