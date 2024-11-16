@@ -4,7 +4,7 @@ class_name Plot extends Area2D
 static var list: Array[Plot]
 static var empty: Array[Plot]
 
-var plant: Plant: set = set_plant
+var plant: Plant
 
 
 func _ready() -> void:
@@ -12,8 +12,9 @@ func _ready() -> void:
 	empty.append(self)
 
 
-func set_plant(value: Plant) -> void:
-	plant = value
+func set_plant(data: PlantData) -> void:
+	plant = preload("res://scenes/plant/plant.tscn").instantiate()
+	plant.data = data
 	plant.died.connect(clear_plant)
 	add_child(plant)
 	empty.erase(self)
