@@ -14,6 +14,13 @@ config/name="Hackathon Fall 24"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Save="*res://autoloads/save.gd"
+GameEvents="*res://autoloads/game_events.gd"
+SceneManager="*res://autoloads/scene_manager.gd"
+BackgroundMusicPlayer="*res://autoloads/background_music_player.gd"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
