@@ -1,11 +1,18 @@
 extends Node2D
 
 
-func add_plant(plant_name: String, pos: Vector2):
-	var plant: Plant = preload("res://scenes/plant.tscn").instantiate()
-	plant.data = load("res://resources/plants/%s.tres" % plant_name)
-	plant.position = pos
+const FARM_SIZE := Vector2i(33, 17)
+const FARM_RECT: Rect2i = Rect2i(-FARM_SIZE/2, FARM_SIZE)
 
 
-func test_plant() -> void:
-	add_plant("wheat", Vector2(randf_range(0, x)))
+func _ready() -> void:
+	for x: int in FARM_SIZE.x: for y: int in FARM_SIZE.y:
+		var plot: Node2D = load("res://scenes/plot/plot.tscn").instantiate()
+		plot.position = (Vector2i(x, y) + FARM_RECT.position) * 16
+		add_child(plot)
+
+
+func _on_spawn_plant_timeout() -> void:
+	var plant: Plant = load("res://scenes/plant/plant.tscn").instantiate()
+	plant.data = load("res://resources/plants/wheat.tres")
+	Plot.empty.pick_random().plant = plant

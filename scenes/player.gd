@@ -8,7 +8,7 @@ var scare_cooldown_timer = 0
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		$Sprite.offset = event.relative.normalized()
+		$Sprite.offset = Vector2(0, -16) + event.relative.normalized()
 	
 	if event.is_action_pressed("scare"):
 		if scare_cooldown_timer <= 0:

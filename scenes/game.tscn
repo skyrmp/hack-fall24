@@ -4,10 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://dmwgm0hfwfju0" path="res://scenes/player.tscn" id="2_gf60o"]
 
 [node name="Game" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_an2dw")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("2_gf60o")]
 
 [node name="SpawnPlant" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="SpawnPlant" to="." method="_on_spawn_plant_timeout"]

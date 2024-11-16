@@ -2,6 +2,7 @@ class_name Plant extends Node2D
 
 
 signal growth_changed
+signal died
 
 @export var data := PlantData.new()
 
@@ -24,10 +25,6 @@ func take_damage(amount: int) -> void:
 	growth -= amount
 
 
-func is_dead() -> bool:
-	return growth <= 0
-
-
 
 # internal
 
@@ -42,3 +39,7 @@ func _ready() -> void:
 
 func _on_growth_changed() -> void:
 	sprite.frame = growth
+	
+	if growth == -1:
+		died.emit()
+		queue_free()

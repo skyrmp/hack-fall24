@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1uts2cmbxnsb"]
+
+[ext_resource type="Script" path="res://scenes/plot/plot.gd" id="1_uhg23"]
+[ext_resource type="Texture2D" uid="uid://bk38mdo4tfj6v" path="res://assets/plot.png" id="2_xjk3e"]
+
+[node name="Plot" type="Node2D" groups=["plot"]]
+script = ExtResource("1_uhg23")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_xjk3e")
