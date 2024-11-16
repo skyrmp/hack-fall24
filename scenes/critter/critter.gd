@@ -3,6 +3,8 @@ extends Area2D
 
 enum {MOVING, VISITING, LEAVING, SCARED}
 
+const MoodAlert = preload("res://scenes/mood_alert/mood_alert.tscn")
+
 @export var critter_data: CritterData
 
 @export var hp: float
@@ -55,8 +57,13 @@ func take_damage(damage: float = 1.0) -> void:
 	hp -= damage
 	speed = critter_data.base_speed * (hp / critter_data.max_hp)
 	if hp <= 0.0:
+		hp = 0.0
 		target_plot = null
 		state = SCARED
+	
+	var mood_alert = MoodAlert.instantiate()
+	mood_alert.set_ratio(hp/critter_data.max_hp)
+	add_child(mood_alert)
 
 
 func get_eat_ratio() -> float:
