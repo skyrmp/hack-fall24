@@ -1,4 +1,4 @@
-class_name Plot extends Node2D
+class_name Plot extends Area2D
 
 
 static var list: Array[Plot]

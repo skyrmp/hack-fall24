@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1uts2cmbxnsb"]
+[gd_scene load_steps=4 format=3 uid="uid://b1uts2cmbxnsb"]
 
 [ext_resource type="Script" path="res://scenes/plot/plot.gd" id="1_uhg23"]
 [ext_resource type="Texture2D" uid="uid://bk38mdo4tfj6v" path="res://assets/plot.png" id="2_xjk3e"]
 
-[node name="Plot" type="Node2D" groups=["plot"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_j7udj"]
+radius = 8.0
+
+[node name="Plot" type="Area2D" groups=["plot"]]
 script = ExtResource("1_uhg23")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = -1
 texture = ExtResource("2_xjk3e")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j7udj")
