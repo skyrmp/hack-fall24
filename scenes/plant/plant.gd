@@ -10,7 +10,7 @@ static var list: Array[Plant]
 
 var growth: int = 0:
 	set(value):
-		growth = clamp(value, 0, data.growth_max - 1)
+		growth = clamp(value, -1, data.growth_max - 1)
 		growth_changed.emit()
 
 @onready var sprite: Sprite2D = $Sprite

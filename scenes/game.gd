@@ -13,6 +13,4 @@ func _ready() -> void:
 
 
 func _on_spawn_plant_timeout() -> void:
-	var plant: Plant = load("res://scenes/plant/plant.tscn").instantiate()
-	plant.data = load("res://resources/plants/wheat.tres")
-	Plot.empty.pick_random().plant = plant
+	Plot.empty.pick_random().set_plant(load("res://resources/plants/wheat.tres"))
