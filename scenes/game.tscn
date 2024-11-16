@@ -9,3 +9,5 @@ script = ExtResource("1_an2dw")
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("2_gf60o")]
+
+[node name="SpawnPlant" type="Timer" parent="."]
