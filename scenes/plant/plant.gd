@@ -48,3 +48,8 @@ func _on_growth_changed() -> void:
 	if growth == -1:
 		died.emit()
 		queue_free()
+	
+	if growth == data.growth_max - 1:
+		growth_timer.stop()
+	else:
+		growth_timer.start(randfn(data.growth_time, 0.5))
