@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Nunito-ExtraBold.ttf-d03a91411e2575038630c74e
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false

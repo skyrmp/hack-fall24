@@ -31,6 +31,7 @@ shape = SubResource("CircleShape2D_fi3ag")
 [node name="ScareRectangle" parent="." instance=ExtResource("3_rjvwr")]
 
 [node name="ScareParticles" type="GPUParticles2D" parent="ScareRectangle"]
+z_index = 1
 emitting = false
 amount = 4
 process_material = SubResource("ParticleProcessMaterial_7rory")

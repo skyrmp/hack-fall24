@@ -12,7 +12,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		$Sprite.offset = Vector2(0, -16) + get_local_mouse_position().normalized()
 	
-	if event.is_action_pressed("scare"):
+	elif event.is_action_pressed("scare"):
 		if scare_cooldown.is_stopped():
 			
 			scare_rectangle.scare_critter_list()
@@ -20,7 +20,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			scare_particles.process_material.angle_min = rad_to_deg(-scare_rectangle.rotation)
 			scare_particles.process_material.angle_max = scare_particles.process_material.angle_min
 			scare_particles.restart()
-		
+			
+			var mood_alert: Node2D = preload("res://scenes/mood_alert/mood_alert.tscn").instantiate()
+			mood_alert.set_level(2)
+			mood_alert.position.y = -40
+			add_child(mood_alert)
+			
 			scared_critters.emit()
 			scare_cooldown.start()
 			#Code where to spawn / activate Scare Rectangle after conditions are met

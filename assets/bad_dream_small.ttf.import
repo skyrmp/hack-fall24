@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://ciie7pv0kve64"
-path="res://.godot/imported/bad-dream-regular.ttf-212cfc5b341eaae02bd1d727b21d3c1f.fontdata"
+uid="uid://dkahhg2kcpj3e"
+path="res://.godot/imported/bad_dream_small.ttf-e910c600235fdf6f3dbc990dfa8c785b.fontdata"
 
 [deps]
 
-source_file="res://assets/bad-dream-regular.ttf"
-dest_files=["res://.godot/imported/bad-dream-regular.ttf-212cfc5b341eaae02bd1d727b21d3c1f.fontdata"]
+source_file="res://assets/bad_dream_small.ttf"
+dest_files=["res://.godot/imported/bad_dream_small.ttf-e910c600235fdf6f3dbc990dfa8c785b.fontdata"]
 
 [params]
 
