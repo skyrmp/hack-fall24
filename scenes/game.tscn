@@ -8,12 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://qx3pnsi5vfrm" path="res://assets/tiles.png" id="3_mw6av"]
 [ext_resource type="Script" path="res://scenes/volume_button.gd" id="3_q21bw"]
 [ext_resource type="Texture2D" uid="uid://2katttg876c8" path="res://assets/volume.png" id="3_re5ct"]
-[ext_resource type="Resource" uid="uid://76xp6nqlrqxl" path="res://resources/critter_data/squirrel.tres" id="4_8qbrl"]
+[ext_resource type="Resource" uid="uid://co06ehs62gjrf" path="res://resources/critter_data/squirrel.tres" id="4_8qbrl"]
 [ext_resource type="PackedScene" uid="uid://b1uts2cmbxnsb" path="res://scenes/plot/plot.tscn" id="4_pkbj1"]
 [ext_resource type="Texture2D" uid="uid://dglpwu6wq6c4i" path="res://assets/radial.png" id="5_gc6m7"]
 [ext_resource type="Script" path="res://scenes/cursor.gd" id="5_wg6kw"]
 [ext_resource type="Resource" uid="uid://d07qd6nrsirtk" path="res://resources/critter_data/crow.tres" id="5_xrcam"]
-[ext_resource type="PackedScene" path="res://title.tscn" id="6_rgebq"]
+[ext_resource type="PackedScene" uid="uid://qf81451xtf6v" path="res://title.tscn" id="6_rgebq"]
 [ext_resource type="Script" path="res://scenes/month_display.gd" id="7_prdwq"]
 [ext_resource type="FontFile" uid="uid://8pywae7icb0n" path="res://assets/Nunito-ExtraBold.ttf" id="9_bhigb"]
 [ext_resource type="Shader" path="res://assets/circle_transition.gdshader" id="10_chvfd"]
@@ -552,6 +552,7 @@ tile_map_data = PackedByteArray("AAD/////AQAAAAAAAQD//wAAAQAAAAAAAQAAAP//AQAAAAA
 tile_set = SubResource("TileSet_qel52")
 
 [node name="Overlay" type="TileMapLayer" parent="."]
+z_index = 1
 y_sort_enabled = true
 position = Vector2(-8, -8)
 tile_map_data = PackedByteArray("AAD6//v/AAADAAAAAAD6//z/AAADAAAAAAD6//3/AAADAAAAAAD6//7/AAADAAAAAAD6////AAADAAAAAAD6/wAAAAADAAAAAAD6/wEAAAADAAAAAAD6/wIAAAADAAAAAAD6/wMAAAADAAAAAAD6/wQAAAADAAAAAAD6/wUAAAADAAAAAAAFAPv/AAAFAAEAAAAFAPz/AAAFAAEAAAAFAP3/AAAFAAEAAAAFAP7/AAAFAAEAAAAFAP//AAAFAAEAAAAFAAAAAAAFAAEAAAAFAAEAAAAFAAEAAAAFAAIAAAAFAAEAAAAFAAMAAAAFAAEAAAAFAAQAAAAFAAEAAAAFAAUAAAAFAAEAAAAGAPv/AAADAAAAAAAGAPz/AAADAAAAAAAGAP3/AAADAAAAAAAGAP7/AAADAAAAAAAGAP//AAADAAAAAAAGAAAAAAADAAAAAAAGAAEAAAADAAAAAAAGAAIAAAADAAAAAAAGAAMAAAADAAAAAAAGAAQAAAADAAAAAAAGAAUAAAADAAAAAAD7//v/AAADAAEAAAD7//z/AAADAAEAAAD7//3/AAADAAEAAAD7//7/AAADAAEAAAD7////AAADAAEAAAD7/wAAAAADAAEAAAD7/wEAAAADAAEAAAD7/wIAAAADAAEAAAD7/wMAAAADAAEAAAD7/wQAAAADAAEAAAD7/wUAAAADAAEAAAA=")

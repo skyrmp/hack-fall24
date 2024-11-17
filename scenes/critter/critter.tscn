@@ -1,16 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://ypusybv8nmht"]
+[gd_scene load_steps=6 format=3 uid="uid://ypusybv8nmht"]
 
 [ext_resource type="Script" path="res://scenes/critter/critter.gd" id="1_nxr6r"]
-[ext_resource type="Resource" path="res://resources/plants/flower.tres" id="2_7uud8"]
+[ext_resource type="Resource" uid="uid://b1yjrouhc6ai1" path="res://resources/plants/flower.tres" id="2_7uud8"]
 [ext_resource type="AudioStream" uid="uid://c8qophqf67fdb" path="res://assets/ack1.wav" id="3_oma0u"]
-[ext_resource type="AudioStream" uid="uid://ccudqjr6fw4gs" path="res://assets/ack2.wav" id="4_do4mg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ds2ia"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q07v0"]
-streams_count = 2
+random_pitch = 1.1
+streams_count = 1
 stream_0/stream = ExtResource("3_oma0u")
-stream_1/stream = ExtResource("4_do4mg")
 
 [node name="Critter" type="Area2D"]
 collision_layer = 2
@@ -25,5 +24,6 @@ shape = SubResource("CircleShape2D_ds2ia")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-16, -16, 32, 32)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AckEvil" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_q07v0")
+bus = &"SFX"
