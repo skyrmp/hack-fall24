@@ -80,7 +80,7 @@ func _on_continue_clicked() -> void:
 			9:
 				pass
 			12:
-				pass # end game
+				pass # end game TODO also TODO get rid of center farmland I think it was causing problems and somehow turning things into players
 		intro_animator.play("intro")
 		await intro_animator.animation_finished
 	
