@@ -26,6 +26,11 @@ func take_damage(amount: int) -> void:
 	growth -= amount
 
 
+func die() -> void:
+	died.emit()
+	queue_free()
+
+
 
 # internal
 
@@ -46,8 +51,7 @@ func _on_growth_changed() -> void:
 	sprite.frame = maxi(growth, 0)
 	
 	if growth == -1:
-		died.emit()
-		queue_free()
+		die()
 	
 	if growth == data.growth_max - 1:
 		growth_timer.stop()

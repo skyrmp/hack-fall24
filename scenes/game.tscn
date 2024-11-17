@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://b5ba33wxoyqo6"]
+[gd_scene load_steps=32 format=4 uid="uid://b5ba33wxoyqo6"]
 
 [ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="2_0krj3"]
 [ext_resource type="PackedScene" uid="uid://dmwgm0hfwfju0" path="res://scenes/player.tscn" id="2_gf60o"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://6ar7v67jwc4e" path="res://scenes/critter_spawner/critter_spawner.tscn" id="8_iqoh5"]
 [ext_resource type="FontFile" uid="uid://8pywae7icb0n" path="res://assets/Nunito-ExtraBold.ttf" id="9_bhigb"]
 [ext_resource type="Shader" path="res://assets/circle_transition.gdshader" id="10_chvfd"]
+[ext_resource type="Texture2D" uid="uid://dbv07y11jgeon" path="res://assets/leaves.png" id="14_vwgoe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qame"]
 texture = ExtResource("3_mw6av")
@@ -116,6 +117,28 @@ _data = {
 "RESET": SubResource("Animation_d4qmk"),
 "intro": SubResource("Animation_74k7f")
 }
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pk38k"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_7ly6j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+metadata/_snap_enabled = true
+
+[sub_resource type="CurveTexture" id="CurveTexture_4jtrh"]
+curve = SubResource("Curve_7ly6j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hleix"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 75, 1)
+gravity = Vector3(-32, 48, 0)
+alpha_curve = SubResource("CurveTexture_4jtrh")
+anim_offset_max = 1.0
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -227,5 +250,11 @@ autoplay = "intro"
 stream = ExtResource("2_0krj3")
 autoplay = true
 bus = &"Music"
+
+[node name="Leaves" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_pk38k")
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_hleix")
+texture = ExtResource("14_vwgoe")
 
 [connection signal="scared_critters" from="Player" to="UI/Cursor" method="animate_cooldown"]

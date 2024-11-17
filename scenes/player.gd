@@ -26,6 +26,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			mood_alert.position.y = -40
 			add_child(mood_alert)
 			
+			$Dzuwmp.play()
+			
 			scared_critters.emit()
 			scare_cooldown.start()
 			#Code where to spawn / activate Scare Rectangle after conditions are met
