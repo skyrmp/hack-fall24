@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=4 uid="uid://b5ba33wxoyqo6"]
+[gd_scene load_steps=70 format=4 uid="uid://b5ba33wxoyqo6"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_rd32i"]
 [ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="2_0krj3"]
@@ -8,13 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://qx3pnsi5vfrm" path="res://assets/tiles.png" id="3_mw6av"]
 [ext_resource type="Script" path="res://scenes/volume_button.gd" id="3_q21bw"]
 [ext_resource type="Texture2D" uid="uid://2katttg876c8" path="res://assets/volume.png" id="3_re5ct"]
-[ext_resource type="Resource" uid="uid://76xp6nqlrqxl" path="res://resources/critter_data/squirrel.tres" id="4_8qbrl"]
+[ext_resource type="Resource" uid="uid://co06ehs62gjrf" path="res://resources/critter_data/squirrel.tres" id="4_8qbrl"]
 [ext_resource type="PackedScene" uid="uid://b1uts2cmbxnsb" path="res://scenes/plot/plot.tscn" id="4_pkbj1"]
 [ext_resource type="Texture2D" uid="uid://dglpwu6wq6c4i" path="res://assets/radial.png" id="5_gc6m7"]
 [ext_resource type="Script" path="res://scenes/cursor.gd" id="5_wg6kw"]
 [ext_resource type="Resource" uid="uid://d07qd6nrsirtk" path="res://resources/critter_data/crow.tres" id="5_xrcam"]
-[ext_resource type="Resource" uid="uid://bhfdrfy65wvvt" path="res://resources/critter_data/worm.tres" id="6_qarpf"]
-[ext_resource type="PackedScene" path="res://title.tscn" id="6_rgebq"]
+[ext_resource type="Resource" uid="uid://cckwmtuvj0euu" path="res://resources/critter_data/worm.tres" id="6_qarpf"]
+[ext_resource type="PackedScene" uid="uid://qf81451xtf6v" path="res://title.tscn" id="6_rgebq"]
 [ext_resource type="Resource" uid="uid://cpk8afvobctnl" path="res://resources/critter_data/evilsquirrel.tres" id="7_m5s61"]
 [ext_resource type="Script" path="res://scenes/month_display.gd" id="7_prdwq"]
 [ext_resource type="Resource" uid="uid://g6r5m8mkq2nf" path="res://resources/critter_data/chicken.tres" id="8_a7rr4"]
@@ -829,6 +829,7 @@ bus = &"SFX"
 [node name="sfx2" type="AudioStreamPlayer" parent="UI/ScoreDecoration"]
 unique_name_in_owner = true
 stream = ExtResource("20_cp2kj")
+bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_0krj3")
