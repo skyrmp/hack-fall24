@@ -14,6 +14,8 @@ const ContinueText = preload("res://title.tscn")
 @onready var ui = %UI
 @onready var intro_animator = %Animator
 @onready var score = %Score
+@onready var score_animator = %ScoreAnimator
+@onready var big_score = %BigScore
 
 @onready var points: int = 0:
 	set(value):
@@ -44,7 +46,13 @@ func _on_wave_finished() -> void:
 		accum += plant.growth
 		plant.grow_fully()
 	
-	# TODO: add score animation
+	var score_tween = create_tween()
+	score_tween.set_ease(Tween.EASE_IN)
+	score_tween.set_trans(Tween.TRANS_CUBIC)
+	score_tween.tween_method(_big_score, 0, accum * fun_multiplier, 0.8)
+	
+	score_animator.play("big_score")
+	await score_animator.animation_finished
 	
 	points += accum * fun_multiplier
 	
@@ -53,7 +61,8 @@ func _on_wave_finished() -> void:
 	ui.add_child(continue_text)
 
 
-
+func _big_score(value: int) -> void:
+	big_score.text = str(value)
 
 
 func _on_continue_clicked() -> void:
@@ -87,3 +96,4 @@ func _on_critter_scared(critter: Critter) -> void:
 	if not critter.is_good():
 		var accum: int = 2
 		points += accum * fun_multiplier
+		score_animator.play("small_score")

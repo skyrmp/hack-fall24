@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://b5ba33wxoyqo6"]
+[gd_scene load_steps=59 format=4 uid="uid://b5ba33wxoyqo6"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_rd32i"]
 [ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="2_0krj3"]
@@ -18,6 +18,7 @@
 [ext_resource type="FontFile" uid="uid://8pywae7icb0n" path="res://assets/Nunito-ExtraBold.ttf" id="9_bhigb"]
 [ext_resource type="Shader" path="res://assets/circle_transition.gdshader" id="10_chvfd"]
 [ext_resource type="Texture2D" uid="uid://dbv07y11jgeon" path="res://assets/leaves.png" id="14_vwgoe"]
+[ext_resource type="FontFile" uid="uid://dkahhg2kcpj3e" path="res://assets/bad_dream_small.ttf" id="17_5svnq"]
 
 [sub_resource type="Resource" id="Resource_2l57k"]
 script = ExtResource("2_wo3kx")
@@ -335,6 +336,150 @@ _data = {
 "intro": SubResource("Animation_74k7f")
 }
 
+[sub_resource type="FontVariation" id="FontVariation_tscnk"]
+base_font = ExtResource("9_bhigb")
+spacing_top = -8
+spacing_bottom = -8
+
+[sub_resource type="Animation" id="Animation_6i86i"]
+resource_name = "small_score"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmallScore:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(181, 15), Vector2(181, 9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SmallScore:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ntmij"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmallScore:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(181, 15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SmallScore:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScoreHold:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScoreHold:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.75, 0.75)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ScoreHold:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_05hyg"]
+resource_name = "big_score"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScoreHold:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScoreHold:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.425, 0.575, 1.5, 2),
+"transitions": PackedFloat32Array(-3, -3, -3, 1, 4, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1.2, 1.2), Vector2(0.9, 0.9), Vector2(1, 1), Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScoreHold:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 4, 1),
+"update": 0,
+"values": [Vector2(100, 75), Vector2(100, 75), Vector2(165, 16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qlx7t"]
+_data = {
+"RESET": SubResource("Animation_ntmij"),
+"big_score": SubResource("Animation_05hyg"),
+"small_score": SubResource("Animation_6i86i")
+}
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pk38k"]
 particles_animation = true
 particles_anim_h_frames = 4
@@ -511,6 +656,60 @@ libraries = {
 "": SubResource("AnimationLibrary_p4udp")
 }
 autoplay = "intro"
+
+[node name="ScoreDecoration" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SmallScore" type="Label" parent="UI/ScoreDecoration"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -19.0
+offset_top = 15.0
+offset_right = -4.0
+offset_bottom = 28.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("17_5svnq")
+text = "+100"
+
+[node name="ScoreHold" type="Node2D" parent="UI/ScoreDecoration"]
+visible = false
+scale = Vector2(0.75, 0.75)
+metadata/_edit_group_ = true
+
+[node name="BigScore" type="Label" parent="UI/ScoreDecoration/ScoreHold"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -9.0
+offset_right = 94.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.180392, 0.509804, 0.388235, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("FontVariation_tscnk")
+theme_override_font_sizes/font_size = 24
+text = "2000"
+horizontal_alignment = 1
+
+[node name="ScoreAnimator" type="AnimationPlayer" parent="UI/ScoreDecoration"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_qlx7t")
+}
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_0krj3")
