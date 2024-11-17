@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5ba33wxoyqo6"]
+[gd_scene load_steps=9 format=3 uid="uid://b5ba33wxoyqo6"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_an2dw"]
 [ext_resource type="PackedScene" uid="uid://dmwgm0hfwfju0" path="res://scenes/player.tscn" id="2_gf60o"]
 [ext_resource type="Script" path="res://scenes/volume_button.gd" id="3_q21bw"]
 [ext_resource type="Texture2D" uid="uid://2katttg876c8" path="res://assets/volume.png" id="3_re5ct"]
+[ext_resource type="Texture2D" uid="uid://dglpwu6wq6c4i" path="res://assets/radial.png" id="5_gc6m7"]
 [ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="5_sjodv"]
+[ext_resource type="Script" path="res://scenes/cursor.gd" id="5_wg6kw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7lba"]
 atlas = ExtResource("3_re5ct")
@@ -15,6 +17,7 @@ y_sort_enabled = true
 script = ExtResource("1_an2dw")
 
 [node name="Player" parent="." instance=ExtResource("2_gf60o")]
+unique_name_in_owner = true
 
 [node name="SpawnPlant" type="Timer" parent="."]
 autostart = true
@@ -36,9 +39,31 @@ size_flags_vertical = 0
 icon = SubResource("AtlasTexture_c7lba")
 script = ExtResource("3_q21bw")
 
+[node name="Cursor" type="Node2D" parent="UI"]
+script = ExtResource("5_wg6kw")
+
+[node name="ScareCooldown" type="TextureProgressBar" parent="UI/Cursor"]
+modulate = Color(1, 1, 1, 0.501961)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.01
+fill_mode = 4
+texture_progress = ExtResource("5_gc6m7")
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_sjodv")
 autoplay = true
 bus = &"Music"
 
+[connection signal="scared_critters" from="Player" to="UI/Cursor" method="animate_cooldown"]
 [connection signal="timeout" from="SpawnPlant" to="." method="_on_spawn_plant_timeout"]
