@@ -158,6 +158,9 @@ func take_damage(damage: float = 1.0) -> void:
 	var mood_alert = MoodAlert.instantiate()
 	mood_alert.set_ratio(hp/critter_data.max_hp)
 	add_child(mood_alert)
+	
+	if not is_good():
+		$AckEvil.play()
 
 
 func get_eat_ratio() -> float:
