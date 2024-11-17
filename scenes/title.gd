@@ -1,11 +1,14 @@
 extends CenterContainer
 
 @onready var title = $VBox/Title
+@onready var subtitle = $VBox/Subtitle
 var text = "Scare the Crow!"
+var subtext = "Click to continue!"
 
 
 func _ready() -> void:
 	title.text = text
+	subtitle.text = subtext
 	position.y = 100
 
 

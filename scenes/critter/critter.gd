@@ -187,7 +187,7 @@ func drop_seed() -> void:
 	
 	var _seed = Seed.instantiate()
 	_seed.global_position = global_position
-	get_tree().get_root().add_child(_seed)
+	get_tree().current_scene.add_child(_seed)
 	_seed.global_position = plot.global_position
 	
 	GameEvents.plant_spawned.emit(plot)

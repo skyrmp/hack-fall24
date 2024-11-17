@@ -6,7 +6,7 @@ const ContinueText = preload("res://title.tscn")
 @export var waves: Array[WaveData]
 @export var months: Array[String]
 
-@export var current_wave: int = -1
+@export var current_wave: int = 10
 
 @export var fun_multiplier: int = 50
 
@@ -66,6 +66,9 @@ func _big_score(value: int) -> void:
 
 
 func _on_continue_clicked() -> void:
+	if current_wave == 12:
+		return
+	
 	current_wave += 1
 	
 	if current_wave == 3 or current_wave == 6 or current_wave == 9 or current_wave == 12:
@@ -80,9 +83,26 @@ func _on_continue_clicked() -> void:
 			9:
 				pass
 			12:
-				pass # end game TODO
+				%Player.hide()
+				var continue_text = ContinueText.instantiate()
+				continue_text.text = "Total: " + str(points)
+				continue_text.subtext = "Click to play again!"
+				ui.add_child(continue_text)
 		intro_animator.play("intro")
 		await intro_animator.animation_finished
+	
+	if current_wave == 12:
+		await GameEvents.continue_clicked
+		intro_animator.play_backwards("intro")
+		await intro_animator.animation_finished
+		await get_tree().create_timer(0.8).timeout
+		
+		Plot.empty.clear()
+		Plot.full.clear()
+		Plot.list.clear()
+		Plant.list.clear()
+		get_tree().reload_current_scene()
+		return
 	
 	await month_display.display(months[current_wave])
 	
