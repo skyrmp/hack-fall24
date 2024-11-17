@@ -64,9 +64,6 @@ func pick_target_edge_point() -> void:
 	if global_position.length_squared() < 4.0:
 		target_edge_direction = Vector2.from_angle(randf_range(0.0, TAU))
 	target_edge_direction = global_position.normalized()
-	
-	if target_edge_direction == Vector2.ZERO:
-		target_edge_direction = Vector2.from_angle(randf_range(0.0, TAU))
 
 
 func _start_state(p_state: int) -> void:
@@ -136,9 +133,6 @@ func _visit_plot(delta: float) -> void:
 
 
 func _leave(delta: float) -> void:
-	if target_edge_direction == Vector2.ZERO:
-		target_edge_direction = Vector2.from_angle(randf_range(0.0, TAU))
-	
 	if target_edge_direction.x >= 0:
 		sprite.flip_h = true
 	else:

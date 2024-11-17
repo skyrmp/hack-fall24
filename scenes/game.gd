@@ -47,8 +47,8 @@ func _on_wave_finished() -> void:
 		plant.grow_fully()
 	
 	var score_tween = create_tween()
-	score_tween.set_ease(Tween.EASE_OUT)
-	score_tween.set_trans(Tween.TRANS_QUART)
+	score_tween.set_ease(Tween.EASE_IN)
+	score_tween.set_trans(Tween.TRANS_CUBIC)
 	score_tween.tween_method(_big_score, 0, accum * fun_multiplier, 0.8)
 	
 	score_animator.play("big_score")
@@ -80,7 +80,7 @@ func _on_continue_clicked() -> void:
 			9:
 				pass
 			12:
-				pass # end game TODO
+				pass # end game TODO also TODO get rid of center farmland I think it was causing problems and somehow turning things into players
 		intro_animator.play("intro")
 		await intro_animator.animation_finished
 	
