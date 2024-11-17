@@ -28,8 +28,15 @@ func grow_fully() -> void:
 
 
 func kill() -> void:
-	died.emit()
 	list.erase(self)
+	died.emit()
+	
+	sprite.hide()
+	$Area.queue_free()
+	
+	$DieParticles.emitting = true
+	await $DieParticles.finished
+	
 	queue_free()
 
 

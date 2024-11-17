@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://b5ba33wxoyqo6"]
+[gd_scene load_steps=61 format=4 uid="uid://b5ba33wxoyqo6"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_rd32i"]
 [ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="2_0krj3"]
@@ -8,12 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://qx3pnsi5vfrm" path="res://assets/tiles.png" id="3_mw6av"]
 [ext_resource type="Script" path="res://scenes/volume_button.gd" id="3_q21bw"]
 [ext_resource type="Texture2D" uid="uid://2katttg876c8" path="res://assets/volume.png" id="3_re5ct"]
-[ext_resource type="Resource" uid="uid://76xp6nqlrqxl" path="res://resources/critter_data/squirrel.tres" id="4_8qbrl"]
+[ext_resource type="Resource" uid="uid://co06ehs62gjrf" path="res://resources/critter_data/squirrel.tres" id="4_8qbrl"]
 [ext_resource type="PackedScene" uid="uid://b1uts2cmbxnsb" path="res://scenes/plot/plot.tscn" id="4_pkbj1"]
 [ext_resource type="Texture2D" uid="uid://dglpwu6wq6c4i" path="res://assets/radial.png" id="5_gc6m7"]
 [ext_resource type="Script" path="res://scenes/cursor.gd" id="5_wg6kw"]
 [ext_resource type="Resource" uid="uid://d07qd6nrsirtk" path="res://resources/critter_data/crow.tres" id="5_xrcam"]
-[ext_resource type="PackedScene" uid="uid://qf81451xtf6v" path="res://title.tscn" id="6_rgebq"]
+[ext_resource type="PackedScene" path="res://title.tscn" id="6_rgebq"]
 [ext_resource type="Script" path="res://scenes/month_display.gd" id="7_prdwq"]
 [ext_resource type="FontFile" uid="uid://8pywae7icb0n" path="res://assets/Nunito-ExtraBold.ttf" id="9_bhigb"]
 [ext_resource type="Shader" path="res://assets/circle_transition.gdshader" id="10_chvfd"]
@@ -129,15 +129,15 @@ texture = ExtResource("3_mw6av")
 1:2/0 = 0
 1:2/0/z_index = -1
 3:1/0 = 0
-3:1/0/z_index = -1
+3:1/0/z_index = 1
 4:0/0 = 0
-4:0/0/z_index = -1
+4:0/0/z_index = 1
 5:1/0 = 0
-5:1/0/z_index = -1
+5:1/0/z_index = 1
 4:2/0 = 0
-4:2/0/z_index = -1
+4:2/0/z_index = 1
 3:0/0 = 0
-3:0/0/z_index = -1
+3:0/0/z_index = 1
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_qf5ho"]
 scenes/1/scene = ExtResource("4_pkbj1")
@@ -341,34 +341,6 @@ base_font = ExtResource("9_bhigb")
 spacing_top = -8
 spacing_bottom = -8
 
-[sub_resource type="Animation" id="Animation_6i86i"]
-resource_name = "small_score"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SmallScore:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.25, 1),
-"update": 0,
-"values": [Vector2(181, 15), Vector2(181, 9)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SmallScore:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="Animation" id="Animation_ntmij"]
 length = 0.001
 tracks/0/type = "value"
@@ -473,6 +445,34 @@ tracks/2/keys = {
 "values": [Vector2(100, 75), Vector2(100, 75), Vector2(165, 16)]
 }
 
+[sub_resource type="Animation" id="Animation_6i86i"]
+resource_name = "small_score"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmallScore:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(181, 15), Vector2(181, 9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SmallScore:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qlx7t"]
 _data = {
 "RESET": SubResource("Animation_ntmij"),
@@ -494,10 +494,22 @@ metadata/_snap_enabled = true
 [sub_resource type="CurveTexture" id="CurveTexture_4jtrh"]
 curve = SubResource("Curve_7ly6j")
 
+[sub_resource type="Curve" id="Curve_1mpv2"]
+max_value = 60.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 60), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="CurveTexture" id="CurveTexture_2a0fu"]
+curve = SubResource("Curve_1mpv2")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hleix"]
 particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(100, 75, 1)
+angle_min = 1.00001
+angle_max = 1.00001
+angle_curve = SubResource("CurveTexture_2a0fu")
 gravity = Vector3(-32, 48, 0)
 alpha_curve = SubResource("CurveTexture_4jtrh")
 anim_offset_max = 1.0
@@ -508,10 +520,16 @@ script = ExtResource("1_rd32i")
 waves = Array[ExtResource("2_wo3kx")]([SubResource("Resource_2l57k"), SubResource("Resource_6x4mr"), SubResource("Resource_odx32"), SubResource("Resource_j1p42"), SubResource("Resource_54b41"), SubResource("Resource_wpafk"), SubResource("Resource_dagqp"), SubResource("Resource_lrgmc"), SubResource("Resource_pkcvj"), SubResource("Resource_afi32"), SubResource("Resource_dtua8"), SubResource("Resource_7n0yr")])
 months = Array[String](["March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "January", "February"])
 
-[node name="TileMap" type="TileMapLayer" parent="."]
+[node name="Background" type="TileMapLayer" parent="."]
 y_sort_enabled = true
 position = Vector2(-8, -8)
-tile_map_data = PackedByteArray("AAD/////AQAAAAAAAQD//wAAAQAAAAAAAQAAAP//AQAAAAAAAQAAAAAAAQAAAAAAAQD+/wAAAQAAAAAAAQD+////AQAAAAAAAQD+//7/AQAAAAAAAQD///7/AQAAAAAAAQAAAP7/AQAAAAAAAQABAP7/AQAAAAAAAQABAP//AQAAAAAAAQABAAAAAQAAAAAAAQABAAEAAQAAAAAAAQAAAAEAAQAAAAAAAQD//wEAAQAAAAAAAQD+/wEAAQAAAAAAAQACAAIAAQAAAAAAAQABAAIAAQAAAAAAAQAAAAIAAQAAAAAAAQD//wIAAQAAAAAAAQD+/wIAAQAAAAAAAQACAAEAAQAAAAAAAQACAAAAAQAAAAAAAQACAP//AQAAAAAAAQACAP7/AQAAAAAAAQD9//7/AQAAAAAAAQD9////AQAAAAAAAQD9/wAAAQAAAAAAAQD9/wEAAQAAAAAAAQD9/wIAAQAAAAAAAQD9/wMAAQAAAAAAAQD+/wMAAQAAAAAAAQABAAMAAQAAAAAAAQACAAMAAQAAAAAAAQAAAAMAAQAAAAAAAQD//wMAAQAAAAAAAQADAAMAAQAAAAAAAQADAAIAAQAAAAAAAQADAAEAAQAAAAAAAQADAAAAAQAAAAAAAQADAP//AQAAAAAAAQADAP7/AQAAAAAAAQADAP3/AQAAAAAAAQACAP3/AQAAAAAAAQABAP3/AQAAAAAAAQAAAP3/AQAAAAAAAQD///3/AQAAAAAAAQD+//3/AQAAAAAAAQD9//3/AQAAAAAAAQD6/wQAAAADAAAAAAD6/wUAAAADAAAAAAD7/wUAAAADAAEAAAD8/wUAAAAAAAAAAAD9/wUAAAAAAAAAAAD+/wUAAAAAAAAAAAD//wUAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAFAAEAAAAGAAUAAAADAAAAAAAGAAQAAAADAAAAAAAGAAMAAAADAAAAAAAGAAIAAAADAAAAAAAGAAEAAAADAAAAAAAGAAAAAAADAAAAAAAGAP//AAADAAAAAAAGAP7/AAADAAAAAAAGAP3/AAADAAAAAAAGAPz/AAADAAAAAAAGAPv/AAADAAAAAAAFAPv/AAAFAAEAAAAEAPv/AAAAAAAAAAADAPv/AAAAAAAAAAACAPv/AAAAAAAAAAABAPv/AAAAAAAAAAAAAPv/AAAAAAAAAAD///v/AAAAAAAAAAD+//v/AAAAAAAAAAD9//v/AAAAAAAAAAD8//v/AAAAAAAAAAD7//v/AAADAAEAAAD6//v/AAADAAAAAAD6//z/AAADAAAAAAD6//3/AAADAAAAAAD6//7/AAADAAAAAAD6////AAADAAAAAAD6/wAAAAADAAAAAAD6/wEAAAADAAAAAAD6/wIAAAADAAAAAAD6/wMAAAADAAAAAAD7/wMAAAADAAEAAAD7/wIAAAADAAEAAAD7/wEAAAADAAEAAAD7/wAAAAADAAEAAAD7////AAADAAEAAAD7//7/AAADAAEAAAD7//3/AAADAAEAAAD7//z/AAADAAEAAAD8//z/AAAAAAAAAAD8//3/AAAAAAEAAAD8//7/AAAAAAEAAAD8////AAAAAAEAAAD8/wAAAAAAAAEAAAD8/wEAAAAAAAEAAAD8/wIAAAAAAAEAAAD8/wMAAAAAAAEAAAD8/wQAAAAAAAAAAAD7/wQAAAADAAEAAAD9/wQAAAABAAIAAAD+/wQAAAABAAIAAAD//wQAAAABAAIAAAAAAAQAAAABAAIAAAABAAQAAAABAAIAAAACAAQAAAABAAIAAAADAAQAAAABAAIAAAAEAAQAAAAAAAAAAAAEAAMAAAACAAEAAAAEAAIAAAACAAEAAAAEAAEAAAACAAEAAAAEAAAAAAACAAEAAAAEAP//AAACAAEAAAAEAP7/AAACAAEAAAAEAP3/AAACAAEAAAAEAPz/AAAAAAAAAAADAPz/AAABAAAAAAACAPz/AAABAAAAAAABAPz/AAABAAAAAAAAAPz/AAABAAAAAAD///z/AAABAAAAAAD+//z/AAABAAAAAAD9//z/AAABAAAAAAAFAPz/AAAFAAEAAAAFAP3/AAAFAAEAAAAFAP7/AAAFAAEAAAAFAP//AAAFAAEAAAAFAAAAAAAFAAEAAAAFAAEAAAAFAAEAAAAFAAIAAAAFAAEAAAAFAAMAAAAFAAEAAAAFAAQAAAAFAAEAAAA=")
+tile_map_data = PackedByteArray("AAD/////AQAAAAAAAQD//wAAAQAAAAAAAQAAAP//AQAAAAAAAQAAAAAAAQAAAAAAAQD+/wAAAQAAAAAAAQD+////AQAAAAAAAQD+//7/AQAAAAAAAQD///7/AQAAAAAAAQAAAP7/AQAAAAAAAQABAP7/AQAAAAAAAQABAP//AQAAAAAAAQABAAAAAQAAAAAAAQABAAEAAQAAAAAAAQAAAAEAAQAAAAAAAQD//wEAAQAAAAAAAQD+/wEAAQAAAAAAAQACAAIAAQAAAAAAAQABAAIAAQAAAAAAAQAAAAIAAQAAAAAAAQD//wIAAQAAAAAAAQD+/wIAAQAAAAAAAQACAAEAAQAAAAAAAQACAAAAAQAAAAAAAQACAP//AQAAAAAAAQACAP7/AQAAAAAAAQD9//7/AQAAAAAAAQD9////AQAAAAAAAQD9/wAAAQAAAAAAAQD9/wEAAQAAAAAAAQD9/wIAAQAAAAAAAQD9/wMAAQAAAAAAAQD+/wMAAQAAAAAAAQABAAMAAQAAAAAAAQACAAMAAQAAAAAAAQAAAAMAAQAAAAAAAQD//wMAAQAAAAAAAQADAAMAAQAAAAAAAQADAAIAAQAAAAAAAQADAAEAAQAAAAAAAQADAAAAAQAAAAAAAQADAP//AQAAAAAAAQADAP7/AQAAAAAAAQADAP3/AQAAAAAAAQACAP3/AQAAAAAAAQABAP3/AQAAAAAAAQAAAP3/AQAAAAAAAQD///3/AQAAAAAAAQD+//3/AQAAAAAAAQD9//3/AQAAAAAAAQD6/wQAAAAAAAAAAAD6/wUAAAAAAAAAAAD7/wUAAAAAAAAAAAD8/wUAAAAAAAAAAAD9/wUAAAAAAAAAAAD+/wUAAAAAAAAAAAD//wUAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAP//AAAAAAAAAAAGAP7/AAAAAAAAAAAGAP3/AAAAAAAAAAAGAPz/AAAAAAAAAAAGAPv/AAAAAAAAAAAFAPv/AAAAAAAAAAAEAPv/AAAAAAAAAAADAPv/AAAAAAAAAAACAPv/AAAAAAAAAAABAPv/AAAAAAAAAAAAAPv/AAAAAAAAAAD///v/AAAAAAAAAAD+//v/AAAAAAAAAAD9//v/AAAAAAAAAAD8//v/AAAAAAAAAAD7//v/AAAAAAAAAAD6//v/AAAAAAAAAAD6//z/AAAAAAAAAAD6//3/AAAAAAAAAAD6//7/AAAAAAAAAAD6////AAAAAAAAAAD6/wAAAAAAAAAAAAD6/wEAAAAAAAAAAAD6/wIAAAAAAAAAAAD6/wMAAAAAAAAAAAD7/wMAAAAAAAAAAAD7/wIAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wAAAAAAAAAAAAD7////AAAAAAAAAAD7//7/AAAAAAAAAAD7//3/AAAAAAAAAAD7//z/AAAAAAAAAAD8//z/AAAAAAAAAAD8//3/AAAAAAEAAAD8//7/AAAAAAEAAAD8////AAAAAAEAAAD8/wAAAAAAAAEAAAD8/wEAAAAAAAEAAAD8/wIAAAAAAAEAAAD8/wMAAAAAAAEAAAD8/wQAAAAAAAAAAAD7/wQAAAAAAAAAAAD9/wQAAAABAAIAAAD+/wQAAAABAAIAAAD//wQAAAABAAIAAAAAAAQAAAABAAIAAAABAAQAAAABAAIAAAACAAQAAAABAAIAAAADAAQAAAABAAIAAAAEAAQAAAAAAAAAAAAEAAMAAAACAAEAAAAEAAIAAAACAAEAAAAEAAEAAAACAAEAAAAEAAAAAAACAAEAAAAEAP//AAACAAEAAAAEAP7/AAACAAEAAAAEAP3/AAACAAEAAAAEAPz/AAAAAAAAAAADAPz/AAABAAAAAAACAPz/AAABAAAAAAABAPz/AAABAAAAAAAAAPz/AAABAAAAAAD///z/AAABAAAAAAD+//z/AAABAAAAAAD9//z/AAABAAAAAAAFAPz/AAAAAAAAAAAFAP3/AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_qel52")
+
+[node name="Overlay" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+position = Vector2(-8, -8)
+tile_map_data = PackedByteArray("AAD6//v/AAADAAAAAAD6//z/AAADAAAAAAD6//3/AAADAAAAAAD6//7/AAADAAAAAAD6////AAADAAAAAAD6/wAAAAADAAAAAAD6/wEAAAADAAAAAAD6/wIAAAADAAAAAAD6/wMAAAADAAAAAAD6/wQAAAADAAAAAAD6/wUAAAADAAAAAAAFAPv/AAAFAAEAAAAFAPz/AAAFAAEAAAAFAP3/AAAFAAEAAAAFAP7/AAAFAAEAAAAFAP//AAAFAAEAAAAFAAAAAAAFAAEAAAAFAAEAAAAFAAEAAAAFAAIAAAAFAAEAAAAFAAMAAAAFAAEAAAAFAAQAAAAFAAEAAAAFAAUAAAAFAAEAAAAGAPv/AAADAAAAAAAGAPz/AAADAAAAAAAGAP3/AAADAAAAAAAGAP7/AAADAAAAAAAGAP//AAADAAAAAAAGAAAAAAADAAAAAAAGAAEAAAADAAAAAAAGAAIAAAADAAAAAAAGAAMAAAADAAAAAAAGAAQAAAADAAAAAAAGAAUAAAADAAAAAAD7//v/AAADAAEAAAD7//z/AAADAAEAAAD7//3/AAADAAEAAAD7//7/AAADAAEAAAD7////AAADAAEAAAD7/wAAAAADAAEAAAD7/wEAAAADAAEAAAD7/wIAAAADAAEAAAD7/wMAAAADAAEAAAD7/wQAAAADAAEAAAD7/wUAAAADAAEAAAA=")
 tile_set = SubResource("TileSet_qel52")
 
 [node name="Player" parent="." instance=ExtResource("2_gf60o")]

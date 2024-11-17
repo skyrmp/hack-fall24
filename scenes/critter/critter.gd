@@ -61,7 +61,7 @@ func pick_target_plot() -> void:
 
 
 func pick_target_edge_point() -> void:
-	if global_position.length_squared() < 1.0:
+	if global_position.length_squared() < 4.0:
 		target_edge_direction = Vector2.from_angle(randf_range(0.0, TAU))
 	target_edge_direction = global_position.normalized()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://baxfd2faauy56"]
+[gd_scene load_steps=14 format=3 uid="uid://baxfd2faauy56"]
 
 [ext_resource type="Script" path="res://scenes/plant/plant.gd" id="1_bci4x"]
 [ext_resource type="Resource" uid="uid://c8gxopps63poj" path="res://resources/plants/wheat.tres" id="2_iwbcx"]
@@ -68,6 +68,14 @@ scale_min = 0.5
 scale_curve = SubResource("CurveTexture_ya7ur")
 alpha_curve = SubResource("CurveTexture_wcjhu")
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ycvl8"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 64.0
+initial_velocity_max = 64.0
+gravity = Vector3(0, 128, 0)
+color = Color(0.180392, 0.509804, 0.388235, 1)
+
 [node name="Plant" type="Node2D"]
 script = ExtResource("1_bci4x")
 data = ExtResource("2_iwbcx")
@@ -95,6 +103,12 @@ process_material = SubResource("ParticleProcessMaterial_7d7u7")
 texture = ExtResource("3_v58kc")
 lifetime = 0.5
 one_shot = true
+
+[node name="DieParticles" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_ycvl8")
+one_shot = true
+explosiveness = 0.5
 
 [connection signal="growth_changed" from="." to="." method="_on_growth_changed"]
 [connection signal="timeout" from="GrowthTimer" to="." method="grow"]

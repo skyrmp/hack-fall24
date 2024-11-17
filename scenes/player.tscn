@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_n1vo3"]
 [ext_resource type="Texture2D" uid="uid://bjv7n8inguh10" path="res://assets/scarecrow.png" id="2_mwgig"]
-[ext_resource type="PackedScene" uid="uid://cmqqghu3sc2ux" path="res://scenes/scare_rectangle.tscn" id="3_rjvwr"]
+[ext_resource type="PackedScene" uid="uid://bqguyoywydx6e" path="res://scenes/scare_rectangle.tscn" id="3_rjvwr"]
 [ext_resource type="Texture2D" uid="uid://c7ndisa1g0jer" path="res://assets/scare_vfx.png" id="4_gdm7i"]
 [ext_resource type="AudioStream" uid="uid://dx8xm0omggnlt" path="res://assets/scare.wav" id="5_8ng4h"]
 

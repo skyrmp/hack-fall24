@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CritterData" load_steps=14 format=3 uid="uid://c6em7pokio5g3"]
+[gd_resource type="Resource" script_class="CritterData" load_steps=14 format=3 uid="uid://cckwmtuvj0euu"]
 
 [ext_resource type="Script" path="res://resources/plants/plant_data.gd" id="1_x7o5a"]
 [ext_resource type="Script" path="res://resources/critter_data/critter_data.gd" id="2_40k64"]
