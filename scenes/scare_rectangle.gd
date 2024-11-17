@@ -9,7 +9,7 @@ func _ready():
 	#func scare_critter_list
 	pass # Replace with function body.
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var mouse_to_scarecrow = position.angle_to_point(get_global_mouse_position())
 	change_rotation(mouse_to_scarecrow)
 

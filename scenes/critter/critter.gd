@@ -1,7 +1,7 @@
 class_name Critter
 extends Area2D
 
-signal despawned
+signal despawned(critter: Critter)
 
 enum {MOVING, VISITING, LEAVING, SCARED}
 
@@ -15,32 +15,71 @@ const MoodAlert = preload("res://scenes/mood_alert/mood_alert.tscn")
 
 var state: int:
 	set(value):
-		if value == LEAVING or value == SCARED:
-			_pick_target_edge_point()
-		if value == SCARED and critter_data.is_good:
-			_drop_seed()
-		if value == VISITING:
-			_visit_ratio = 0.0
-			_visit_duration = randf_range(critter_data.visit_wait_range[0], critter_data.visit_wait_range[1])
-		
+		_start_state(value)
 		state = value
 
-var target_plot: Node2D
+var target_plot: Plot
+var target_edge_point: Vector2
 
-var _target_edge_point: Vector2
-var _visit_ratio: float = 0.0:
+var visit_duration: float
+var visit_ratio: float = 0.0:
 	set(value):
-		_visit_ratio = clampf(value, 0.0, 1.0)
+		visit_ratio = clampf(value, 0.0, 1.0)
 
-var _visit_duration: float
-var _plots_to_visit: int
-var _plots_visited: int = 0
+var plots_to_visit: int
+var plots_visited: int = 0
+
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 
 func _ready() -> void:
 	$VisibleOnScreenNotifier2D.screen_exited.connect(despawn)
 	_setup_critter_data()
-	_pick_target_plot()
+	pick_target_plot()
+
+
+func _setup_critter_data() -> void:
+	hp = critter_data.max_hp
+	speed = critter_data.base_speed
+	sprite.sprite_frames = critter_data.sprite_frames
+	
+	plots_to_visit = critter_data.get_random_visit_amount()
+	
+	if not current_plant: current_plant = critter_data.possible_plants.pick_random()
+
+
+## Picks a plot to go to. Also sets state
+func pick_target_plot() -> void:
+	if not is_good() and not Plot.full.is_empty():
+		target_plot = Plot.full.pick_random()
+	else:
+		target_plot = Plot.list.pick_random()
+	
+	state = MOVING
+
+
+func pick_target_edge_point() -> void:
+	target_edge_point = global_position.normalized() * (get_viewport_rect().size.x * 2.0)
+
+
+func _start_state(p_state: int) -> void:
+	match p_state:
+		MOVING:
+			pass
+			
+		VISITING:
+			visit_ratio = 0.0
+			visit_duration = critter_data.get_random_visit_time()
+			
+		LEAVING:
+			speed = critter_data.base_speed
+			pick_target_edge_point()
+			
+		SCARED:
+			speed = critter_data.scared_speed
+			pick_target_edge_point()
+			if is_good():
+				drop_seed()
 
 
 func _physics_process(delta: float) -> void:
@@ -52,7 +91,34 @@ func _physics_process(delta: float) -> void:
 		LEAVING:
 			_leave(delta)
 		SCARED:
-			_run_away(delta)
+			_leave(delta)
+
+
+func _move_towards_plot(delta: float) -> void:
+	global_position = global_position.move_toward(target_plot.global_position, delta * speed)
+	
+	if target_plot.global_position - global_position == Vector2.ZERO:
+		state = VISITING
+
+
+func _visit_plot(delta: float) -> void:
+	
+	visit_ratio += (delta / visit_duration) * (hp / critter_data.max_hp)
+	
+	if visit_ratio == 1.0:
+		# Kill plant if bad critter
+		if not is_good() and target_plot.plant:
+			target_plot.plant.kill()
+		
+		plots_visited += 1
+		if plots_visited >= plots_to_visit:
+			state = LEAVING
+		else:
+			pick_target_plot()
+
+
+func _leave(delta: float) -> void:
+	global_position = global_position.move_toward(target_edge_point, delta * speed)
 
 
 func take_damage(damage: float = 1.0) -> void:
@@ -69,57 +135,14 @@ func take_damage(damage: float = 1.0) -> void:
 
 
 func get_eat_ratio() -> float:
-	return _visit_ratio
+	return visit_ratio
 
 
-func _move_towards_plot(delta: float) -> void:
-	global_position = global_position.move_toward(target_plot.global_position, delta * speed)
-	if target_plot.global_position - global_position == Vector2.ZERO:
-		state = VISITING
+func is_good() -> bool:
+	return critter_data.is_good
 
 
-func _visit_plot(delta: float) -> void:
-	if critter_data.is_good:
-		_visit_ratio += (delta / _visit_duration)
-		
-		if _visit_ratio == 1.0:
-			_plots_visited += 1
-			if _plots_visited >= _plots_to_visit:
-				state = LEAVING
-			else:
-				_pick_target_plot()
-	
-	# Case for bad critter
-	else:
-		# If plant is dead or nonexistent, reselect
-		if target_plot.plant == null:
-			_pick_target_plot()
-			return
-		
-		_visit_ratio += (delta / critter_data.eat_speed) * (hp/critter_data.max_hp)
-		
-		if _visit_ratio == 1.0:
-			target_plot.plant.take_damage(1)
-
-
-func _leave(delta: float) -> void:
-	global_position = global_position.move_toward(_target_edge_point, delta * critter_data.base_speed)
-
-
-func _run_away(delta: float) -> void:
-	global_position = global_position.move_toward(_target_edge_point, delta * critter_data.scared_speed)
-
-
-func _setup_critter_data() -> void:
-	hp = critter_data.max_hp
-	speed = critter_data.base_speed
-	$AnimatedSprite2D.sprite_frames = critter_data.sprite_frames
-	if not critter_data.possible_plants.is_empty():
-		current_plant = critter_data.possible_plants.pick_random()
-	_plots_to_visit = randi_range(critter_data.visit_amount_range[0], critter_data.visit_amount_range[1])
-
-
-func _drop_seed() -> void:
+func drop_seed() -> void:
 	var plots = get_overlapping_areas()
 	
 	for i in range(plots.size() - 1, -1, -1):
@@ -131,29 +154,9 @@ func _drop_seed() -> void:
 	
 	var plot: Plot = plots.pick_random()
 	plot.set_plant(current_plant)
-
-
-## Picks a plot to go to. Also sets state
-func _pick_target_plot() -> void:
-	var plots: Array = get_tree().get_nodes_in_group(&"plot")
-	
-	# Remove empty plots if critter is bad
-	if not critter_data.is_good:
-		for i in range(plots.size() - 1, -1, -1):
-			if plots[i].plant == null:
-				plots.remove_at(i)
-	
-	if plots.is_empty():
-		state = LEAVING
-	else:
-		target_plot = plots.pick_random()
-		state = MOVING
-
-
-func _pick_target_edge_point() -> void:
-	_target_edge_point = global_position.normalized() * (get_viewport_rect().size.x * 2.0)
+	GameEvents.plant_spawned.emit(plot)
 
 
 func despawn() -> void:
-	despawned.emit()
+	despawned.emit(self)
 	queue_free()

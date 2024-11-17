@@ -3,6 +3,7 @@ class_name Plot extends Area2D
 
 static var list: Array[Plot]
 static var empty: Array[Plot]
+static var full: Array[Plot]
 
 var plant: Plant
 
@@ -22,8 +23,10 @@ func set_plant(data: PlantData) -> void:
 	plant.died.connect(clear_plant)
 	add_child(plant)
 	empty.erase(self)
+	full.append(self)
 
 
 func clear_plant() -> void:
 	plant = null
 	empty.append(self)
+	full.erase(self)
