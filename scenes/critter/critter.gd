@@ -20,7 +20,7 @@ var state: int:
 		state = value
 
 var target_plot: Plot
-var target_edge_point: Vector2
+var target_edge_direction: Vector2
 
 var visit_duration: float
 var visit_ratio: float = 0.0:
@@ -61,7 +61,9 @@ func pick_target_plot() -> void:
 
 
 func pick_target_edge_point() -> void:
-	target_edge_point = global_position.normalized() * (get_viewport_rect().size.x * 2.0)
+	if global_position.length_squared() < 1.0:
+		target_edge_direction = Vector2.from_angle(randf_range(0.0, TAU))
+	target_edge_direction = global_position.normalized()
 
 
 func _start_state(p_state: int) -> void:
@@ -131,11 +133,11 @@ func _visit_plot(delta: float) -> void:
 
 
 func _leave(delta: float) -> void:
-	if target_edge_point.x >= global_position.x:
+	if target_edge_direction.x >= 0:
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false
-	global_position = global_position.move_toward(target_edge_point, delta * speed)
+	global_position += target_edge_direction * delta * speed
 
 
 func take_damage(damage: float = 1.0) -> void:
