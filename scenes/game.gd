@@ -6,7 +6,7 @@ const ContinueText = preload("res://title.tscn")
 @export var waves: Array[WaveData]
 @export var months: Array[String]
 
-@export var current_wave: int = 2
+@export var current_wave: int = -1
 
 @export var fun_multiplier: int = 50
 
