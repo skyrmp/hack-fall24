@@ -22,8 +22,14 @@ func grow() -> void:
 	$GrowParticles.restart()
 
 
+func grow_fully() -> void:
+	growth = data.growth_max - 1
+	$GrowParticles.restart()
+
+
 func kill() -> void:
 	died.emit()
+	list.erase(self)
 	queue_free()
 
 

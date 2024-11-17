@@ -23,7 +23,7 @@ shape = SubResource("CircleShape2D_ds2ia")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-rect = Rect2(-30, -30, 60, 60)
+rect = Rect2(-16, -16, 32, 32)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_q07v0")

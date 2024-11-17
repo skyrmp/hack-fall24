@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://qf81451xtf6v"]
+
+[ext_resource type="Script" path="res://scenes/title.gd" id="1_svuqy"]
+[ext_resource type="FontFile" uid="uid://8pywae7icb0n" path="res://assets/Nunito-ExtraBold.ttf" id="2_84w3n"]
+[ext_resource type="FontFile" uid="uid://dkahhg2kcpj3e" path="res://assets/bad_dream_small.ttf" id="3_ni88e"]
+
+[sub_resource type="FontVariation" id="FontVariation_pu121"]
+base_font = ExtResource("2_84w3n")
+spacing_top = -8
+spacing_bottom = -8
+
+[node name="Title" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_svuqy")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.180392, 0.509804, 0.388235, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("FontVariation_pu121")
+theme_override_font_sizes/font_size = 24
+text = " Scare the Crow!"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.180392, 0.509804, 0.388235, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_ni88e")
+text = "Click to continue!"
+horizontal_alignment = 1
