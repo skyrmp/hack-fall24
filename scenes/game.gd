@@ -13,4 +13,4 @@ func _ready() -> void:
 
 
 func _on_spawn_plant_timeout() -> void:
-	Plot.empty.pick_random().set_plant(load("res://resources/plants/wheat.tres"))
+	Plot.empty.pick_random().set_plant(load("res://resources/plants/flower.tres"))

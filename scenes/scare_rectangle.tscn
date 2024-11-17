@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/scare_rectangle.gd" id="1_drwpl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0xab"]
-size = Vector2(22, 400)
+size = Vector2(24, 400)
 
 [node name="ScareRectangle" type="Area2D"]
 collision_mask = 2

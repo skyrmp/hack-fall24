@@ -1,16 +1,79 @@
-[gd_scene load_steps=4 format=3 uid="uid://baxfd2faauy56"]
+[gd_scene load_steps=13 format=3 uid="uid://baxfd2faauy56"]
 
 [ext_resource type="Script" path="res://scenes/plant/plant.gd" id="1_bci4x"]
 [ext_resource type="Resource" uid="uid://c8gxopps63poj" path="res://resources/plants/wheat.tres" id="2_iwbcx"]
+[ext_resource type="Texture2D" uid="uid://uplapt01fixa" path="res://assets/grow_vfx.png" id="3_v58kc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6d4u"]
 radius = 8.0
+
+[sub_resource type="Animation" id="Animation_6l28w"]
+resource_name = "appear"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5xl7u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ghkvh"]
+_data = {
+"RESET": SubResource("Animation_5xl7u"),
+"appear": SubResource("Animation_6l28w")
+}
+
+[sub_resource type="Curve" id="Curve_1jcpw"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
+[sub_resource type="CurveTexture" id="CurveTexture_wcjhu"]
+curve = SubResource("Curve_1jcpw")
+
+[sub_resource type="Curve" id="Curve_7gh1s"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="CurveTexture" id="CurveTexture_ya7ur"]
+curve = SubResource("Curve_7gh1s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7d7u7"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_ya7ur")
+alpha_curve = SubResource("CurveTexture_wcjhu")
 
 [node name="Plant" type="Node2D"]
 script = ExtResource("1_bci4x")
 data = ExtResource("2_iwbcx")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+offset = Vector2(0, -8)
 
 [node name="Area" type="Area2D" parent="."]
 
@@ -18,6 +81,20 @@ data = ExtResource("2_iwbcx")
 shape = SubResource("CircleShape2D_r6d4u")
 
 [node name="GrowthTimer" type="Timer" parent="."]
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ghkvh")
+}
+autoplay = "appear"
+
+[node name="GrowParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_7d7u7")
+texture = ExtResource("3_v58kc")
+lifetime = 0.5
+one_shot = true
 
 [connection signal="growth_changed" from="." to="." method="_on_growth_changed"]
 [connection signal="timeout" from="GrowthTimer" to="." method="grow"]

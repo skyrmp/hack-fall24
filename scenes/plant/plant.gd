@@ -19,6 +19,7 @@ var growth: int = 0:
 
 func grow() -> void:
 	growth += 1
+	$GrowParticles.restart()
 
 
 func take_damage(amount: int) -> void:
@@ -31,8 +32,12 @@ func take_damage(amount: int) -> void:
 func _ready() -> void:
 	sprite.texture = data.sprite_sheet
 	sprite.hframes = data.growth_max
-	growth_timer.start(data.growth_time)
+	sprite.offset += Vector2(randf_range(-2, 2), randf_range(-2, 2))
+	sprite.flip_h = randi() % 2
+	
+	growth_timer.start(randfn(data.growth_time, 0.5))
 	growth_changed.emit()
+	$GrowParticles.restart()
 	
 	list.append(self)
 
