@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://resources/plants/plant_data.gd" id="1_ufxym"]
 [ext_resource type="Script" path="res://resources/critter_data/critter_data.gd" id="2_rt747"]
-[ext_resource type="Texture2D" uid="uid://1qxoy3psfqht" path="res://icon.svg" id="3_sfg0m"]
+[ext_resource type="Texture2D" uid="uid://bjv7n8inguh10" path="res://assets/scarecrow.png" id="3_k20ih"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_dwra1"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_yctda"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_sfg0m")
+"texture": ExtResource("3_k20ih")
 }],
 "loop": true,
 "name": &"default",
@@ -23,5 +23,5 @@ base_speed = 100.0
 scared_speed = 150.0
 visit_amount_range = Array[int]([2, 5])
 visit_time_range = Array[float]([1.0, 3.0])
-sprite_frames = SubResource("SpriteFrames_dwra1")
+sprite_frames = SubResource("SpriteFrames_yctda")
 possible_plants = Array[ExtResource("1_ufxym")]([])
