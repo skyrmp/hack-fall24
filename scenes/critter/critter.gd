@@ -1,6 +1,8 @@
 class_name Critter
 extends Area2D
 
+signal despawned
+
 enum {MOVING, VISITING, LEAVING, SCARED}
 
 const MoodAlert = preload("res://scenes/mood_alert/mood_alert.tscn")
@@ -36,7 +38,7 @@ var _plots_visited: int = 0
 
 
 func _ready() -> void:
-	$VisibleOnScreenNotifier2D.screen_exited.connect(queue_free)
+	$VisibleOnScreenNotifier2D.screen_exited.connect(despawn)
 	_setup_critter_data()
 	_pick_target_plot()
 
@@ -151,3 +153,8 @@ func _pick_target_plot() -> void:
 func _pick_target_edge_point() -> void:
 	var screen_center: Vector2 = get_viewport_rect().size / 2.0
 	_target_edge_point = Vector2(global_position - screen_center).normalized() * (get_viewport_rect().size.x * 2.0)
+
+
+func despawn() -> void:
+	despawned.emit()
+	queue_free()

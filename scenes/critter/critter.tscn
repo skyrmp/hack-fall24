@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://ypusybv8nmht"]
+[gd_scene load_steps=4 format=3 uid="uid://ypusybv8nmht"]
 
 [ext_resource type="Script" path="res://scenes/critter/critter.gd" id="1_nxr6r"]
+[ext_resource type="Resource" uid="uid://c8gxopps63poj" path="res://resources/plants/wheat.tres" id="2_1igqy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ds2ia"]
 
 [node name="Critter" type="Area2D"]
 collision_layer = 2
 script = ExtResource("1_nxr6r")
+current_plant = ExtResource("2_1igqy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ds2ia")

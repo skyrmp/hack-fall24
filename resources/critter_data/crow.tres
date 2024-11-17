@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CritterData" load_steps=3 format=3 uid="uid://d07qd6nrsirtk"]
+
+[ext_resource type="Script" path="res://resources/plants/plant_data.gd" id="1_ufxym"]
+[ext_resource type="Script" path="res://resources/critter_data/critter_data.gd" id="2_rt747"]
+
+[resource]
+script = ExtResource("2_rt747")
+is_good = false
+max_hp = 2.0
+base_speed = 100.0
+scared_speed = 150.0
+eat_speed = 2.0
+visit_amount_range = Array[int]([2, 5])
+visit_wait_range = Array[float]([0.5, 3.0])
+possible_plants = Array[ExtResource("1_ufxym")]([])
