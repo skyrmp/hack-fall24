@@ -56,7 +56,7 @@ damping_curve = SubResource("CurveTexture_egndy")
 scale_min = 0.1
 scale_max = 0.1
 scale_curve = SubResource("CurveTexture_je1co")
-color = Color(0.32549, 0.690196, 0.403922, 1)
+color = Color(0.92549, 0.772549, 0.505882, 1)
 alpha_curve = SubResource("CurveTexture_8mp8m")
 
 [node name="ScoreParticles" type="GPUParticles2D"]
