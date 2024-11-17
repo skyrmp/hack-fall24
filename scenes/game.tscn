@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://b5ba33wxoyqo6"]
+[gd_scene load_steps=19 format=4 uid="uid://b5ba33wxoyqo6"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_an2dw"]
 [ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="2_0krj3"]
@@ -31,14 +31,21 @@ scenes/1/scene = ExtResource("4_pkbj1")
 sources/0 = SubResource("TileSetAtlasSource_4qame")
 sources/1 = SubResource("TileSetScenesCollectionSource_qf5ho")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aojy4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pj62n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_500jq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3tou1"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7lba"]
 atlas = ExtResource("3_re5ct")
-region = Rect2(0, 0, 12, 12)
+region = Rect2(12, 0, 12, 12)
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_an2dw")
-music = ExtResource("2_0krj3")
 
 [node name="TileMap" type="TileMapLayer" parent="."]
 position = Vector2(-8, -8)
@@ -59,11 +66,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="Button" type="Button" parent="UI/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aojy4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pj62n")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_500jq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3tou1")
 icon = SubResource("AtlasTexture_c7lba")
 script = ExtResource("3_q21bw")
 
@@ -71,16 +86,15 @@ script = ExtResource("3_q21bw")
 script = ExtResource("5_wg6kw")
 
 [node name="ScareCooldown" type="TextureProgressBar" parent="UI/Cursor"]
-modulate = Color(1, 1, 1, 0.501961)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -88,6 +102,11 @@ max_value = 1.0
 step = 0.01
 fill_mode = 4
 texture_progress = ExtResource("5_gc6m7")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0krj3")
+autoplay = true
+bus = &"Music"
 
 [node name="CritterSpawner" parent="." instance=ExtResource("8_iqoh5")]
 

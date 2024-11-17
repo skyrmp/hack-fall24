@@ -10,7 +10,7 @@ signal scared_critters
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		$Sprite.offset = Vector2(0, -16) + event.relative.normalized()
+		$Sprite.offset = Vector2(0, -16) + get_local_mouse_position().normalized()
 	
 	if event.is_action_pressed("scare"):
 		if scare_cooldown.is_stopped():

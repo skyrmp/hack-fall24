@@ -8,7 +8,10 @@ var plant: Plant
 
 
 func _ready() -> void:
-	$Sprite.frame = randi_range(0, $Sprite.hframes)
+	$Sprite.frame = randi_range(0, $Sprite.hframes - 1)
+	$Sprite.flip_h = randi() % 2
+	$Sprite.flip_v = randi() % 2
+	
 	list.append(self)
 	empty.append(self)
 
