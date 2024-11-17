@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://cperdmjfif726"]
+
+[ext_resource type="Texture2D" uid="uid://dglpwu6wq6c4i" path="res://assets/radial.png" id="1_ngx1a"]
+
+[sub_resource type="Curve" id="Curve_31wcp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0590909), -4.8, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8mp8m"]
+curve = SubResource("Curve_31wcp")
+
+[sub_resource type="Curve" id="Curve_3wlq8"]
+max_value = 200.0
+_data = [Vector2(0, 18.6364), 0.0, 0.0, 0, 0, Vector2(0.602273, 53.6364), 183.53, 183.53, 0, 0, Vector2(0.899621, 85.4545), -33.6, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_egndy"]
+curve = SubResource("Curve_3wlq8")
+
+[sub_resource type="Curve" id="Curve_fcr0k"]
+max_value = 4.0
+_data = [Vector2(0.00568182, 3.09091), 0.0, 0.0, 0, 0, Vector2(0.643939, 4), 0.0, 0.0, 0, 0, Vector2(1, 0.181818), -10.2545, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_je1co"]
+curve = SubResource("Curve_fcr0k")
+
+[sub_resource type="Curve" id="Curve_2jqqb"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0.00378788, 21.8182), 0.0, -544.0, 0, 0, Vector2(0.094697, 12.7273), 0.0, 0.0, 0, 0, Vector2(1, 27.2727), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3q182"]
+curve = SubResource("Curve_2jqqb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sumxs"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 5.0
+emission_ring_inner_radius = 5.0
+inherit_velocity_ratio = 0.1
+spread = 75.0
+initial_velocity_min = 34.62
+initial_velocity_max = 34.62
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 13.08
+linear_accel_max = 20.77
+tangential_accel_curve = SubResource("CurveTexture_3q182")
+damping_min = 1.41
+damping_max = 1.41
+damping_curve = SubResource("CurveTexture_egndy")
+scale_min = 0.1
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_je1co")
+color = Color(0.32549, 0.690196, 0.403922, 1)
+alpha_curve = SubResource("CurveTexture_8mp8m")
+
+[node name="ScoreParticles" type="GPUParticles2D"]
+position = Vector2(189, 11)
+rotation = 2.18166
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_sumxs")
+texture = ExtResource("1_ngx1a")
+one_shot = true
+explosiveness = 1.0
+randomness = 0.25
