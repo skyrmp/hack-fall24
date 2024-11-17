@@ -24,11 +24,12 @@ BackgroundMusicPlayer="*res://autoloads/background_music_player.gd"
 
 [display]
 
-window/size/viewport_width=600
-window/size/viewport_height=400
+window/size/viewport_width=200
+window/size/viewport_height=150
 window/size/window_width_override=1200
-window/size/window_height_override=800
+window/size/window_height_override=900
 window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [input]
 

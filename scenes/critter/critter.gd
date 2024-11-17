@@ -103,11 +103,11 @@ func _visit_plot(delta: float) -> void:
 
 
 func _leave(delta: float) -> void:
-	global_position = global_position.move_toward(target_plot.global_position, delta * critter_data.base_speed)
+	global_position = global_position.move_toward(_target_edge_point, delta * critter_data.base_speed)
 
 
 func _run_away(delta: float) -> void:
-	global_position = global_position.move_toward(target_plot.global_position, delta * critter_data.scared_speed)
+	global_position = global_position.move_toward(_target_edge_point, delta * critter_data.scared_speed)
 
 
 func _setup_critter_data() -> void:
@@ -123,7 +123,7 @@ func _drop_seed() -> void:
 	var plots = get_overlapping_areas()
 	
 	for i in range(plots.size() - 1, -1, -1):
-			if plots[i].plant:
+			if (not plots[i] is Plot) or plots[i].plant:
 				plots.remove_at(i)
 	
 	if plots.is_empty():
@@ -151,8 +151,7 @@ func _pick_target_plot() -> void:
 
 
 func _pick_target_edge_point() -> void:
-	var screen_center: Vector2 = get_viewport_rect().size / 2.0
-	_target_edge_point = Vector2(global_position - screen_center).normalized() * (get_viewport_rect().size.x * 2.0)
+	_target_edge_point = global_position.normalized() * (get_viewport_rect().size.x * 2.0)
 
 
 func despawn() -> void:

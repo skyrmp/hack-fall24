@@ -1,7 +1,19 @@
-[gd_resource type="Resource" script_class="CritterData" load_steps=3 format=3 uid="uid://d07qd6nrsirtk"]
+[gd_resource type="Resource" script_class="CritterData" load_steps=5 format=3 uid="uid://d07qd6nrsirtk"]
 
 [ext_resource type="Script" path="res://resources/plants/plant_data.gd" id="1_ufxym"]
 [ext_resource type="Script" path="res://resources/critter_data/critter_data.gd" id="2_rt747"]
+[ext_resource type="Texture2D" uid="uid://1qxoy3psfqht" path="res://icon.svg" id="3_sfg0m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dwra1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_sfg0m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [resource]
 script = ExtResource("2_rt747")
@@ -12,4 +24,5 @@ scared_speed = 150.0
 eat_speed = 2.0
 visit_amount_range = Array[int]([2, 5])
 visit_wait_range = Array[float]([0.5, 3.0])
+sprite_frames = SubResource("SpriteFrames_dwra1")
 possible_plants = Array[ExtResource("1_ufxym")]([])

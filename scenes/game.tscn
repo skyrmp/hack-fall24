@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5ba33wxoyqo6"]
+[gd_scene load_steps=10 format=3 uid="uid://b5ba33wxoyqo6"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_an2dw"]
+[ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="2_0krj3"]
 [ext_resource type="PackedScene" uid="uid://dmwgm0hfwfju0" path="res://scenes/player.tscn" id="2_gf60o"]
 [ext_resource type="Script" path="res://scenes/volume_button.gd" id="3_q21bw"]
 [ext_resource type="Texture2D" uid="uid://2katttg876c8" path="res://assets/volume.png" id="3_re5ct"]
@@ -15,12 +16,12 @@ region = Rect2(0, 0, 12, 12)
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_an2dw")
+music = ExtResource("2_0krj3")
 
 [node name="Player" parent="." instance=ExtResource("2_gf60o")]
 unique_name_in_owner = true
 
 [node name="SpawnPlant" type="Timer" parent="."]
-autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 

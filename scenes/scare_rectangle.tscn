@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqguyoywydx6e"]
+[gd_scene load_steps=3 format=3 uid="uid://cmqqghu3sc2ux"]
 
 [ext_resource type="Script" path="res://scenes/scare_rectangle.gd" id="1_drwpl"]
 
@@ -6,6 +6,7 @@
 size = Vector2(24, 400)
 
 [node name="ScareRectangle" type="Area2D"]
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_drwpl")
 

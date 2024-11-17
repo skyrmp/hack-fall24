@@ -1,8 +1,8 @@
 extends AudioStreamPlayer
 
-var fade_in_time: float = 0.0
+var fade_in_time: float = 1.0
 var fade_out_time: float = 0.5
-var fade_wait_time: float = 0.0
+var fade_wait_time: float = 0.5
 
 var _fade_tween: Tween = null
 

@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 
 signal scared_critters
@@ -15,8 +15,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("scare"):
 		if scare_cooldown.is_stopped():
 			
-			var mouse_to_scarecrow = scare_rectangle.position.angle_to_point(get_global_mouse_position())
-			scare_rectangle.change_rotation(mouse_to_scarecrow)
 			scare_rectangle.scare_critter_list()
 			
 			scare_particles.process_material.angle_min = rad_to_deg(-scare_rectangle.rotation)
