@@ -120,7 +120,7 @@ metadata/Seed = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w78rs")
-frame_progress = 0.426583
+frame_progress = 0.580924
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

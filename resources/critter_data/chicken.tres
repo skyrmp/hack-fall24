@@ -1,0 +1,90 @@
+[gd_resource type="Resource" script_class="CritterData" load_steps=13 format=3 uid="uid://g6r5m8mkq2nf"]
+
+[ext_resource type="Script" path="res://resources/plants/plant_data.gd" id="1_aox8c"]
+[ext_resource type="Script" path="res://resources/critter_data/critter_data.gd" id="2_6h1tg"]
+[ext_resource type="Texture2D" uid="uid://c2w76uulx3vji" path="res://assets/critters/chicken_critter.png" id="3_g5lsj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eardy"]
+atlas = ExtResource("3_g5lsj")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3ils"]
+atlas = ExtResource("3_g5lsj")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oal53"]
+atlas = ExtResource("3_g5lsj")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkg5i"]
+atlas = ExtResource("3_g5lsj")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6e8ot"]
+atlas = ExtResource("3_g5lsj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inc1w"]
+atlas = ExtResource("3_g5lsj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4sfb"]
+atlas = ExtResource("3_g5lsj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u0pw"]
+atlas = ExtResource("3_g5lsj")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yctda"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eardy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3ils")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oal53")
+}],
+"loop": true,
+"name": &"Eat",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkg5i")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6e8ot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inc1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4sfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u0pw")
+}],
+"loop": true,
+"name": &"Move",
+"speed": 8.0
+}]
+
+[resource]
+script = ExtResource("2_6h1tg")
+is_good = false
+max_hp = 3.0
+base_speed = 75.0
+scared_speed = 150.0
+visit_amount_range = Array[int]([2, 5])
+visit_time_range = Array[float]([1.0, 3.0])
+sprite_frames = SubResource("SpriteFrames_yctda")
+possible_plants = Array[ExtResource("1_aox8c")]([])
