@@ -1,15 +1,18 @@
-[gd_scene load_steps=19 format=4 uid="uid://b5ba33wxoyqo6"]
+[gd_scene load_steps=27 format=4 uid="uid://b5ba33wxoyqo6"]
 
-[ext_resource type="Script" path="res://scenes/game.gd" id="1_an2dw"]
 [ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="2_0krj3"]
 [ext_resource type="PackedScene" uid="uid://dmwgm0hfwfju0" path="res://scenes/player.tscn" id="2_gf60o"]
 [ext_resource type="Texture2D" uid="uid://qx3pnsi5vfrm" path="res://assets/tiles.png" id="3_mw6av"]
 [ext_resource type="Script" path="res://scenes/volume_button.gd" id="3_q21bw"]
 [ext_resource type="Texture2D" uid="uid://2katttg876c8" path="res://assets/volume.png" id="3_re5ct"]
 [ext_resource type="PackedScene" uid="uid://b1uts2cmbxnsb" path="res://scenes/plot/plot.tscn" id="4_pkbj1"]
+[ext_resource type="Script" path="res://scenes/title.gd" id="5_75frf"]
 [ext_resource type="Texture2D" uid="uid://dglpwu6wq6c4i" path="res://assets/radial.png" id="5_gc6m7"]
 [ext_resource type="Script" path="res://scenes/cursor.gd" id="5_wg6kw"]
 [ext_resource type="PackedScene" uid="uid://6ar7v67jwc4e" path="res://scenes/critter_spawner/critter_spawner.tscn" id="8_iqoh5"]
+[ext_resource type="FontFile" uid="uid://8pywae7icb0n" path="res://assets/Nunito-ExtraBold.ttf" id="9_bhigb"]
+[ext_resource type="FontFile" uid="uid://ciie7pv0kve64" path="res://assets/bad-dream-regular.ttf" id="10_3ytsf"]
+[ext_resource type="Shader" path="res://assets/circle_transition.gdshader" id="10_chvfd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qame"]
 texture = ExtResource("3_mw6av")
@@ -31,6 +34,11 @@ scenes/1/scene = ExtResource("4_pkbj1")
 sources/0 = SubResource("TileSetAtlasSource_4qame")
 sources/1 = SubResource("TileSetScenesCollectionSource_qf5ho")
 
+[sub_resource type="FontVariation" id="FontVariation_pu121"]
+base_font = ExtResource("9_bhigb")
+spacing_top = -8
+spacing_bottom = -8
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aojy4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pj62n"]
@@ -43,9 +51,50 @@ sources/1 = SubResource("TileSetScenesCollectionSource_qf5ho")
 atlas = ExtResource("3_re5ct")
 region = Rect2(12, 0, 12, 12)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_olefc"]
+shader = ExtResource("10_chvfd")
+shader_parameter/circle_size = 1.05
+shader_parameter/screen_width = 200.0
+shader_parameter/screen_height = 150.0
+
+[sub_resource type="Animation" id="Animation_d4qmk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Intro:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.05]
+}
+
+[sub_resource type="Animation" id="Animation_74k7f"]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Intro:material:shader_parameter/circle_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.05]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p4udp"]
+_data = {
+"RESET": SubResource("Animation_d4qmk"),
+"intro": SubResource("Animation_74k7f")
+}
+
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_an2dw")
 
 [node name="TileMap" type="TileMapLayer" parent="."]
 y_sort_enabled = true
@@ -56,9 +105,37 @@ tile_set = SubResource("TileSet_qel52")
 [node name="Player" parent="." instance=ExtResource("2_gf60o")]
 unique_name_in_owner = true
 
-[node name="SpawnPlant" type="Timer" parent="."]
+[node name="CritterSpawner" parent="." instance=ExtResource("8_iqoh5")]
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Title" type="CenterContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_75frf")
+
+[node name="VBox" type="VBoxContainer" parent="UI/Title"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="UI/Title/VBox"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("FontVariation_pu121")
+theme_override_font_sizes/font_size = 24
+text = "Scare the Crow!"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="UI/Title/VBox"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("10_3ytsf")
+text = "Click to continue!"
+horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="UI"]
 anchors_preset = 15
@@ -72,7 +149,7 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Button" type="Button" parent="UI/MarginContainer"]
+[node name="MusicToggle" type="Button" parent="UI/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -104,12 +181,25 @@ step = 0.01
 fill_mode = 4
 texture_progress = ExtResource("5_gc6m7")
 
+[node name="Intro" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_olefc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.180392, 0.509804, 0.388235, 1)
+
+[node name="Animator" type="AnimationPlayer" parent="UI"]
+libraries = {
+"": SubResource("AnimationLibrary_p4udp")
+}
+autoplay = "intro"
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_0krj3")
 autoplay = true
 bus = &"Music"
 
-[node name="CritterSpawner" parent="." instance=ExtResource("8_iqoh5")]
-
 [connection signal="scared_critters" from="Player" to="UI/Cursor" method="animate_cooldown"]
-[connection signal="timeout" from="SpawnPlant" to="." method="_on_spawn_plant_timeout"]
