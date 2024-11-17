@@ -81,8 +81,8 @@ animations = [{
 [resource]
 script = ExtResource("2_rfay8")
 is_good = false
-max_hp = 3.0
-base_speed = 60.0
+max_hp = 4.0
+base_speed = 50.0
 scared_speed = 120.0
 visit_amount_range = Array[int]([2, 5])
 visit_time_range = Array[float]([1.0, 3.0])

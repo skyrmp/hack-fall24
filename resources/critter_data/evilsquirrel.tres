@@ -81,7 +81,7 @@ animations = [{
 [resource]
 script = ExtResource("2_vp3v1")
 is_good = false
-max_hp = 1.0
+max_hp = 2.0
 base_speed = 120.0
 scared_speed = 150.0
 visit_amount_range = Array[int]([2, 5])
