@@ -14,6 +14,8 @@ const Seed = preload("res://scenes/seed/seed.tscn")
 @export var speed: float
 @export var current_plant: PlantData
 
+@onready var visible_notifier = $VisibleOnScreenNotifier2D
+
 var state: int:
 	set(value):
 		_start_state(value)
@@ -61,6 +63,11 @@ func pick_target_plot() -> void:
 
 
 func pick_target_edge_point() -> void:
+	# For bugfix: kill immediately if trying to leave and already not onscreen
+	if not visible_notifier.is_on_screen():
+		despawn()
+		return
+	
 	if global_position.length_squared() < 4.0:
 		target_edge_direction = Vector2.from_angle(randf_range(0.0, TAU))
 	target_edge_direction = global_position.normalized()
