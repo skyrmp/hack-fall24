@@ -8,6 +8,7 @@ var plant: Plant
 
 
 func _ready() -> void:
+	$Sprite.frame = randi_range(0, $Sprite.hframes)
 	list.append(self)
 	empty.append(self)
 
