@@ -83,7 +83,7 @@ script = ExtResource("1_dgnjm")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_w50bj")
-hframes = 3
+hframes = 4
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {

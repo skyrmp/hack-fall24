@@ -22,7 +22,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			scare_particles.restart()
 			
 			var mood_alert: Node2D = preload("res://scenes/mood_alert/mood_alert.tscn").instantiate()
-			mood_alert.set_level(2)
+			mood_alert.set_level(3)
 			mood_alert.position.y = -40
 			add_child(mood_alert)
 			
