@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://scenes/volume_button.gd" id="3_q21bw"]
 [ext_resource type="Texture2D" uid="uid://2katttg876c8" path="res://assets/volume.png" id="3_re5ct"]
 [ext_resource type="Texture2D" uid="uid://dglpwu6wq6c4i" path="res://assets/radial.png" id="5_gc6m7"]
-[ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="5_sjodv"]
 [ext_resource type="Script" path="res://scenes/cursor.gd" id="5_wg6kw"]
+[ext_resource type="PackedScene" uid="uid://6ar7v67jwc4e" path="res://scenes/critter_spawner/critter_spawner.tscn" id="8_iqoh5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7lba"]
 atlas = ExtResource("3_re5ct")
@@ -61,10 +61,7 @@ step = 0.01
 fill_mode = 4
 texture_progress = ExtResource("5_gc6m7")
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_sjodv")
-autoplay = true
-bus = &"Music"
+[node name="CritterSpawner" parent="." instance=ExtResource("8_iqoh5")]
 
 [connection signal="scared_critters" from="Player" to="UI/Cursor" method="animate_cooldown"]
 [connection signal="timeout" from="SpawnPlant" to="." method="_on_spawn_plant_timeout"]

@@ -6,7 +6,7 @@
 
 [node name="CritterSpawner" type="Node2D"]
 script = ExtResource("1_pycco")
-Critter = ExtResource("2_cy0hu")
+CritterScene = ExtResource("2_cy0hu")
 wave_data = ExtResource("3_mok7x")
 
 [node name="Timer" type="Timer" parent="."]

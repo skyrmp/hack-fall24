@@ -43,7 +43,7 @@ func _ready() -> void:
 
 
 func _on_growth_changed() -> void:
-	sprite.frame = growth
+	sprite.frame = maxi(growth, 0)
 	
 	if growth == -1:
 		died.emit()

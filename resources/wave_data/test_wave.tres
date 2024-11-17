@@ -11,3 +11,4 @@ good_critter_amount = 4
 bad_critter_amount = 2
 good_critters = Array[ExtResource("1_hhjan")]([ExtResource("3_c2jh5")])
 bad_critters = Array[ExtResource("1_hhjan")]([ExtResource("2_qprvb")])
+spawn_time_range = Array[float]([0.5, 2.5])

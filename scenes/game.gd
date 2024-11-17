@@ -1,7 +1,7 @@
 extends Node2D
 
 
-const FARM_SIZE := Vector2i(33, 17)
+const FARM_SIZE := Vector2i(5,5) #Vector2i(33, 17)
 const FARM_RECT: Rect2i = Rect2i(-FARM_SIZE/2, FARM_SIZE)
 
 

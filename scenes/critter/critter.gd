@@ -99,7 +99,7 @@ func _visit_plot(delta: float) -> void:
 		_visit_ratio += (delta / critter_data.eat_speed) * (hp/critter_data.max_hp)
 		
 		if _visit_ratio == 1.0:
-			target_plot.plant.take_damage()
+			target_plot.plant.take_damage(1)
 
 
 func _leave(delta: float) -> void:

@@ -3,17 +3,17 @@ extends Node2D
 signal wave_finished
 
 
-@export var Critter: PackedScene
+@export var CritterScene: PackedScene
 @export var wave_data: WaveData
 
-var good_critters_left: int = wave_data.good_critter_amount
-var bad_critters_left: int = wave_data.bad_critter_amount
-
-var total_critters: int = good_critters_left + bad_critters_left
-var critters_despawned: int = 0
-
-@onready var spawn_radius = 30.0 + get_viewport_rect().size.x * (sqrt(2)/2)
+@onready var spawn_radius = 30.0 + (get_viewport_rect().size.x * (sqrt(2)/2.0))
 @onready var timer = $Timer
+
+@onready var good_critters_left: int = wave_data.good_critter_amount
+@onready var bad_critters_left: int = wave_data.bad_critter_amount
+
+@onready var total_critters: int = good_critters_left + bad_critters_left
+@onready var critters_despawned: int = 0
 
 
 func _ready() -> void:
@@ -22,10 +22,12 @@ func _ready() -> void:
 
 
 func spawn_critter() -> void:
-	var critter = Critter.instantiate()
+	var critter = CritterScene.instantiate()
 	
+	#randf_range(0.0, TAU)  * spawn_radius
 	# Assign stuff to critter
-	critter.global_position = (Vector2.from_angle(randf_range(0.0, TAU)) * spawn_radius) + (get_viewport_rect().size/2)
+	print((Vector2.from_angle(PI)) + get_viewport_rect().get_center())
+	critter.global_position = (Vector2.from_angle(PI) * spawn_radius) + get_viewport_rect().get_center()
 	critter.despawned.connect(increment_critters_despawned)
 	
 	
