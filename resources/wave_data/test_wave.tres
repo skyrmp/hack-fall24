@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://resources/critter_data/critter_data.gd" id="1_hhjan"]
 [ext_resource type="Script" path="res://resources/wave_data/wave_data.gd" id="2_e4ao0"]
 [ext_resource type="Resource" uid="uid://d07qd6nrsirtk" path="res://resources/critter_data/crow.tres" id="2_qprvb"]
-[ext_resource type="Resource" path="res://resources/critter_data/squirrel.tres" id="3_c2jh5"]
+[ext_resource type="Resource" uid="uid://76xp6nqlrqxl" path="res://resources/critter_data/squirrel.tres" id="3_c2jh5"]
 
 [resource]
 script = ExtResource("2_e4ao0")

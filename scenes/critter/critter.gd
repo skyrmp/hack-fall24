@@ -80,6 +80,8 @@ func _start_state(p_state: int) -> void:
 			pick_target_edge_point()
 			if is_good():
 				drop_seed()
+			
+			GameEvents.critter_scared.emit()
 
 
 func _physics_process(delta: float) -> void:
