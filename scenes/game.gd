@@ -3,6 +3,7 @@ extends Node2D
 const CritterSpawnerScene = preload("res://scenes/critter_spawner/critter_spawner.tscn")
 const ContinueText = preload("res://title.tscn")
 
+
 @export var waves: Array[WaveData]
 @export var months: Array[String]
 
@@ -35,6 +36,7 @@ const ContinueText = preload("res://title.tscn")
 func _ready() -> void:
 	GameEvents.continue_clicked.connect(_on_continue_clicked)
 	GameEvents.critter_scared.connect(_on_critter_scared)
+	#GameEvents.plant_grew.connect(func(): %sfx.play())
 
 
 func _on_wave_finished() -> void:
@@ -54,6 +56,8 @@ func _on_wave_finished() -> void:
 	score_animator.play("big_score")
 	await score_animator.animation_finished
 	
+	
+	%sfx2.play()
 	points += accum * fun_multiplier
 	
 	var continue_text = ContinueText.instantiate()

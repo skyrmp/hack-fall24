@@ -65,4 +65,5 @@ func _on_growth_changed() -> void:
 	if growth == data.growth_max - 1:
 		growth_timer.stop()
 	else:
+		GameEvents.plant_grew.emit()
 		growth_timer.start(randfn(data.growth_time, 0.5))

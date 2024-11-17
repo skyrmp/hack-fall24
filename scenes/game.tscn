@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=4 uid="uid://b5ba33wxoyqo6"]
+[gd_scene load_steps=65 format=4 uid="uid://b5ba33wxoyqo6"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_rd32i"]
 [ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="2_0krj3"]
@@ -25,6 +25,9 @@
 [ext_resource type="PackedScene" uid="uid://cperdmjfif726" path="res://scenes/score_particles.tscn" id="14_rxftw"]
 [ext_resource type="Texture2D" uid="uid://dbv07y11jgeon" path="res://assets/leaves.png" id="14_vwgoe"]
 [ext_resource type="FontFile" uid="uid://dkahhg2kcpj3e" path="res://assets/bad_dream_small.ttf" id="17_5svnq"]
+[ext_resource type="AudioStream" uid="uid://dluo517huwr1n" path="res://assets/points_get_big.wav" id="19_1t0mu"]
+[ext_resource type="AudioStream" uid="uid://rykay7di3y3a" path="res://assets/bwip.wav" id="20_cp2kj"]
+[ext_resource type="AudioStream" uid="uid://cpide4ey18ue8" path="res://assets/points_get_small.wav" id="20_f107t"]
 
 [sub_resource type="Resource" id="Resource_2l57k"]
 script = ExtResource("2_wo3kx")
@@ -295,7 +298,7 @@ _data = {
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7lba"]
 atlas = ExtResource("3_re5ct")
-region = Rect2(12, 0, 12, 12)
+region = Rect2(0, 0, 12, 12)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bqtsa"]
 font_size = 12
@@ -421,6 +424,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%sfx:stream")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("20_cp2kj")]
+}
 
 [sub_resource type="Animation" id="Animation_05hyg"]
 resource_name = "big_score"
@@ -474,6 +489,33 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sfx")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("19_1t0mu")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%sfx:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("20_cp2kj")]
+}
 
 [sub_resource type="Animation" id="Animation_6i86i"]
 resource_name = "small_score"
@@ -502,6 +544,21 @@ tracks/1/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sfx")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("20_f107t")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qlx7t"]
 _data = {
@@ -762,6 +819,16 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_qlx7t")
 }
+
+[node name="sfx" type="AudioStreamPlayer" parent="UI/ScoreDecoration"]
+unique_name_in_owner = true
+stream = ExtResource("20_cp2kj")
+max_polyphony = 5
+bus = &"SFX"
+
+[node name="sfx2" type="AudioStreamPlayer" parent="UI/ScoreDecoration"]
+unique_name_in_owner = true
+stream = ExtResource("20_cp2kj")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_0krj3")
