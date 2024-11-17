@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dluo517huwr1n"
-path="res://.godot/imported/points_get_big.wav-1aa9a63a0533f06911a2c7f45315d785.sample"
+path="res://.godot/imported/points_get_big.wav-8bd18123a26ad5b35733e5b3914d07e9.sample"
 
 [deps]
 
-source_file="res://points_get_big.wav"
-dest_files=["res://.godot/imported/points_get_big.wav-1aa9a63a0533f06911a2c7f45315d785.sample"]
+source_file="res://assets/points_get_big.wav"
+dest_files=["res://.godot/imported/points_get_big.wav-8bd18123a26ad5b35733e5b3914d07e9.sample"]
 
 [params]
 
