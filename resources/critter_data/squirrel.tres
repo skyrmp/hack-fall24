@@ -1,7 +1,56 @@
-[gd_resource type="Resource" script_class="CritterData" load_steps=3 format=3 uid="uid://76xp6nqlrqxl"]
+[gd_resource type="Resource" script_class="CritterData" load_steps=10 format=3 uid="uid://76xp6nqlrqxl"]
 
 [ext_resource type="Script" path="res://resources/plants/plant_data.gd" id="1_j5sav"]
 [ext_resource type="Script" path="res://resources/critter_data/critter_data.gd" id="2_ml4sh"]
+[ext_resource type="Texture2D" uid="uid://ceyxarbif222q" path="res://assets/critters/squirrel_critter.png" id="3_b0jao"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwvnj"]
+atlas = ExtResource("3_b0jao")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1qt6"]
+atlas = ExtResource("3_b0jao")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8jfn"]
+atlas = ExtResource("3_b0jao")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv3k6"]
+atlas = ExtResource("3_b0jao")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xklna"]
+atlas = ExtResource("3_b0jao")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h60xw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwvnj")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1qt6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8jfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yv3k6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xklna")
+}],
+"loop": true,
+"name": &"Move",
+"speed": 8.0
+}]
 
 [resource]
 script = ExtResource("2_ml4sh")
@@ -9,7 +58,7 @@ is_good = true
 max_hp = 1.0
 base_speed = 100.0
 scared_speed = 150.0
-eat_speed = 1.0
 visit_amount_range = Array[int]([2, 5])
-visit_wait_range = Array[float]([0.5, 3.0])
+visit_time_range = Array[float]([1.0, 3.0])
+sprite_frames = SubResource("SpriteFrames_h60xw")
 possible_plants = Array[ExtResource("1_j5sav")]([])

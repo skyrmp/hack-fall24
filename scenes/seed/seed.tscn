@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://ctxq0740gxbxp"]
+
+[ext_resource type="Texture2D" uid="uid://boefjf2dxu14r" path="res://assets/seed.png" id="1_kvb7m"]
+[ext_resource type="Script" path="res://scenes/seed/seed.gd" id="1_svesq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwist"]
+atlas = ExtResource("1_kvb7m")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_en3nf"]
+atlas = ExtResource("1_kvb7m")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdy6o"]
+atlas = ExtResource("1_kvb7m")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m45p1"]
+atlas = ExtResource("1_kvb7m")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqvrc"]
+atlas = ExtResource("1_kvb7m")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6x5d"]
+atlas = ExtResource("1_kvb7m")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w78rs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwist")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_en3nf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdy6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m45p1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqvrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6x5d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="Animation" id="Animation_sfi70"]
+resource_name = "Drop"
+length = 0.600003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -6), Vector2(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_xes7i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jnlo2"]
+_data = {
+"Drop": SubResource("Animation_sfi70"),
+"RESET": SubResource("Animation_xes7i")
+}
+
+[node name="Seed" type="Node2D"]
+script = ExtResource("1_svesq")
+metadata/Seed = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_w78rs")
+frame_progress = 0.537592
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jnlo2")
+}

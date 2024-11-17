@@ -6,6 +6,7 @@ signal despawned(critter: Critter)
 enum {MOVING, VISITING, LEAVING, SCARED}
 
 const MoodAlert = preload("res://scenes/mood_alert/mood_alert.tscn")
+const Seed = preload("res://scenes/seed/seed.tscn")
 
 @export var critter_data: CritterData
 
@@ -54,7 +55,8 @@ func pick_target_plot() -> void:
 		target_plot = Plot.full.pick_random()
 	else:
 		target_plot = Plot.list.pick_random()
-	
+		
+	sprite.play("Move")
 	state = MOVING
 
 
@@ -97,13 +99,21 @@ func _physics_process(delta: float) -> void:
 func _move_towards_plot(delta: float) -> void:
 	global_position = global_position.move_toward(target_plot.global_position, delta * speed)
 	
+	if target_plot.global_position.x > global_position.x:
+		sprite.flip_h = true
+	elif target_plot.global_position.x < global_position.x:
+		sprite.flip_h = false
+		
 	if target_plot.global_position - global_position == Vector2.ZERO:
+		sprite.play("Idle")
 		state = VISITING
 
 
 func _visit_plot(delta: float) -> void:
 	
 	visit_ratio += (delta / visit_duration) * (hp / critter_data.max_hp)
+	if not is_good() and target_plot.plant and sprite.animation != "Eat":
+		sprite.play("Eat")
 	
 	if visit_ratio == 1.0:
 		# Kill plant if bad critter
@@ -112,12 +122,17 @@ func _visit_plot(delta: float) -> void:
 		
 		plots_visited += 1
 		if plots_visited >= plots_to_visit:
+			sprite.play("Move")
 			state = LEAVING
 		else:
 			pick_target_plot()
 
 
 func _leave(delta: float) -> void:
+	if target_edge_point.x >= global_position.x:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
 	global_position = global_position.move_toward(target_edge_point, delta * speed)
 
 
@@ -127,6 +142,7 @@ func take_damage(damage: float = 1.0) -> void:
 	if hp <= 0.0:
 		hp = 0.0
 		target_plot = null
+		sprite.play("Move" , 9)
 		state = SCARED
 	
 	var mood_alert = MoodAlert.instantiate()
@@ -154,6 +170,12 @@ func drop_seed() -> void:
 	
 	var plot: Plot = plots.pick_random()
 	plot.set_plant(current_plant)
+	
+	var _seed = Seed.instantiate()
+	_seed.global_position = global_position
+	get_tree().get_root().add_child(_seed)
+	_seed.global_position = plot.global_position
+	
 	GameEvents.plant_spawned.emit(plot)
 
 
