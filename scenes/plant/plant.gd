@@ -22,11 +22,7 @@ func grow() -> void:
 	$GrowParticles.restart()
 
 
-func take_damage(amount: int) -> void:
-	growth -= amount
-
-
-func die() -> void:
+func kill() -> void:
 	died.emit()
 	queue_free()
 
@@ -51,7 +47,7 @@ func _on_growth_changed() -> void:
 	sprite.frame = maxi(growth, 0)
 	
 	if growth == -1:
-		die()
+		kill()
 	
 	if growth == data.growth_max - 1:
 		growth_timer.stop()
