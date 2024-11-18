@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=4 uid="uid://b5ba33wxoyqo6"]
+[gd_scene load_steps=77 format=4 uid="uid://b5ba33wxoyqo6"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_rd32i"]
 [ext_resource type="AudioStream" uid="uid://bgelxqc1yki7" path="res://assets/music.mp3" id="2_0krj3"]
@@ -28,6 +28,12 @@
 [ext_resource type="AudioStream" uid="uid://dluo517huwr1n" path="res://assets/points_get_big.wav" id="19_1t0mu"]
 [ext_resource type="AudioStream" uid="uid://rykay7di3y3a" path="res://assets/bwip.wav" id="20_cp2kj"]
 [ext_resource type="AudioStream" uid="uid://cpide4ey18ue8" path="res://assets/points_get_small.wav" id="20_f107t"]
+[ext_resource type="Script" path="res://assets/shaders/new_script.gd" id="29_pr7bc"]
+[ext_resource type="Shader" path="res://assets/shaders/lut_palette.gdshader" id="30_07rht"]
+[ext_resource type="Texture2D" uid="uid://cerx6ei8d7wtj" path="res://assets/shaders/summer_lut.png" id="31_ocvqy"]
+[ext_resource type="Texture2D" uid="uid://somcthdpoifv" path="res://assets/shaders/spring_lut.png" id="31_r0ek7"]
+[ext_resource type="Texture2D" uid="uid://dy3m681qrtrxv" path="res://assets/shaders/fall_lut.png" id="32_js7wa"]
+[ext_resource type="Texture2D" uid="uid://cds7jo32p55ot" path="res://assets/shaders/winter_lut.png" id="33_st1pk"]
 
 [sub_resource type="Resource" id="Resource_2l57k"]
 script = ExtResource("2_wo3kx")
@@ -601,6 +607,11 @@ gravity = Vector3(-32, 48, 0)
 alpha_curve = SubResource("CurveTexture_4jtrh")
 anim_offset_max = 1.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_alwg3"]
+shader = ExtResource("30_07rht")
+shader_parameter/divisor = 32.0
+shader_parameter/lut = ExtResource("31_r0ek7")
+
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_rd32i")
@@ -841,5 +852,19 @@ material = SubResource("CanvasItemMaterial_pk38k")
 amount = 4
 process_material = SubResource("ParticleProcessMaterial_hleix")
 texture = ExtResource("14_vwgoe")
+
+[node name="ScreenEffect" type="CanvasLayer" parent="."]
+layer = 5
+script = ExtResource("29_pr7bc")
+palettes = Array[Texture2D]([ExtResource("31_r0ek7"), ExtResource("31_ocvqy"), ExtResource("32_js7wa"), ExtResource("33_st1pk")])
+
+[node name="ColorRect" type="ColorRect" parent="ScreenEffect"]
+material = SubResource("ShaderMaterial_alwg3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="scared_critters" from="Player" to="UI/Cursor" method="animate_cooldown"]
