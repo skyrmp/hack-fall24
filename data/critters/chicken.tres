@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CritterData" load_steps=13 format=3 uid="uid://g6r5m8mkq2nf"]
 
-[ext_resource type="Script" path="res://resources/plants/plant_data.gd" id="1_aox8c"]
-[ext_resource type="Script" path="res://resources/critter_data/critter_data.gd" id="2_6h1tg"]
+[ext_resource type="Script" path="res://data/plants/plant_data.gd" id="1_aox8c"]
+[ext_resource type="Script" path="res://data/critters/critter_data.gd" id="2_6h1tg"]
 [ext_resource type="Texture2D" uid="uid://c2w76uulx3vji" path="res://assets/critters/chicken_critter.png" id="3_g5lsj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eardy"]

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlantData" load_steps=3 format=3 uid="uid://b1yjrouhc6ai1"]
 
-[ext_resource type="Script" path="res://resources/plants/plant_data.gd" id="1_icjyn"]
+[ext_resource type="Script" path="res://data/plants/plant_data.gd" id="1_icjyn"]
 [ext_resource type="Texture2D" uid="uid://cullqk0ulwfje" path="res://assets/plants/flower.png" id="2_s7q4k"]
 
 [resource]

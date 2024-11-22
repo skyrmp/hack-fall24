@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ypusybv8nmht"]
 
 [ext_resource type="Script" path="res://scenes/critter/critter.gd" id="1_nxr6r"]
-[ext_resource type="Resource" uid="uid://b1yjrouhc6ai1" path="res://resources/plants/flower.tres" id="2_7uud8"]
+[ext_resource type="Resource" uid="uid://b1yjrouhc6ai1" path="res://data/plants/flower.tres" id="2_7uud8"]
 [ext_resource type="AudioStream" uid="uid://c8qophqf67fdb" path="res://assets/ack1.wav" id="3_oma0u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ds2ia"]

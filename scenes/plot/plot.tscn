@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1uts2cmbxnsb"]
+[gd_scene load_steps=5 format=3 uid="uid://b1uts2cmbxnsb"]
 
+[ext_resource type="Material" uid="uid://bosicvtlv6if4" path="res://assets/palette_swap.tres" id="1_q3na5"]
 [ext_resource type="Script" path="res://scenes/plot/plot.gd" id="1_uhg23"]
 [ext_resource type="Texture2D" uid="uid://bk38mdo4tfj6v" path="res://assets/plot.png" id="2_xjk3e"]
 
@@ -11,6 +12,7 @@ script = ExtResource("1_uhg23")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = -1
+material = ExtResource("1_q3na5")
 texture = ExtResource("2_xjk3e")
 hframes = 5
 

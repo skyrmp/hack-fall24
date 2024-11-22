@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://baxfd2faauy56"]
 
 [ext_resource type="Script" path="res://scenes/plant/plant.gd" id="1_bci4x"]
-[ext_resource type="Resource" uid="uid://c8gxopps63poj" path="res://resources/plants/wheat.tres" id="2_iwbcx"]
+[ext_resource type="Resource" uid="uid://c8gxopps63poj" path="res://data/plants/wheat.tres" id="2_iwbcx"]
 [ext_resource type="Texture2D" uid="uid://uplapt01fixa" path="res://assets/grow_vfx.png" id="3_v58kc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6d4u"]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=4 format=3 uid="uid://dl22p8fjm68kr"]
+
+[ext_resource type="Script" path="res://data/critters/critter_data.gd" id="1_txsex"]
+[ext_resource type="Resource" uid="uid://co06ehs62gjrf" path="res://data/critters/squirrel.tres" id="2_dk3sr"]
+[ext_resource type="Script" path="res://data/waves/wave_data.gd" id="3_u5g6l"]
+
+[resource]
+script = ExtResource("3_u5g6l")
+good_critter_amount = 10
+bad_critter_amount = 0
+good_critters = Array[ExtResource("1_txsex")]([ExtResource("2_dk3sr"), ExtResource("2_dk3sr")])
+bad_critters = Array[ExtResource("1_txsex")]([])
+spawn_time_range = Array[float]([0.5, 2.5])

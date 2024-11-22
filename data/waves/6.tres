@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=5 format=3 uid="uid://b44mtohn7ndws"]
+
+[ext_resource type="Script" path="res://data/critters/critter_data.gd" id="1_rclh0"]
+[ext_resource type="Resource" uid="uid://tds34kucibxi" path="res://data/critters/evilcapybara.tres" id="2_03ar1"]
+[ext_resource type="Resource" uid="uid://cckwmtuvj0euu" path="res://data/critters/worm.tres" id="3_dn84k"]
+[ext_resource type="Script" path="res://data/waves/wave_data.gd" id="4_efihg"]
+
+[resource]
+script = ExtResource("4_efihg")
+good_critter_amount = 4
+bad_critter_amount = 4
+good_critters = Array[ExtResource("1_rclh0")]([ExtResource("3_dn84k")])
+bad_critters = Array[ExtResource("1_rclh0")]([ExtResource("2_03ar1")])
+spawn_time_range = Array[float]([1.0, 2.5])

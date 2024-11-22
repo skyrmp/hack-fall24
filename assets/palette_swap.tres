@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bosicvtlv6if4"]
+
+[ext_resource type="Shader" path="res://assets/palette_swap.gdshader" id="1_imtd7"]
+
+[resource]
+shader = ExtResource("1_imtd7")

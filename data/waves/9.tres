@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=6 format=3 uid="uid://b7jiwo78myptx"]
+
+[ext_resource type="Script" path="res://data/critters/critter_data.gd" id="1_qcmlh"]
+[ext_resource type="Resource" uid="uid://g6r5m8mkq2nf" path="res://data/critters/chicken.tres" id="2_ak2gn"]
+[ext_resource type="Resource" uid="uid://d07qd6nrsirtk" path="res://data/critters/crow.tres" id="3_m1oqi"]
+[ext_resource type="Resource" uid="uid://lmy6isnodpx3" path="res://data/critters/capybara.tres" id="4_1r2fb"]
+[ext_resource type="Script" path="res://data/waves/wave_data.gd" id="5_77t7q"]
+
+[resource]
+script = ExtResource("5_77t7q")
+good_critter_amount = 2
+bad_critter_amount = 6
+good_critters = Array[ExtResource("1_qcmlh")]([ExtResource("4_1r2fb")])
+bad_critters = Array[ExtResource("1_qcmlh")]([ExtResource("2_ak2gn"), ExtResource("2_ak2gn"), ExtResource("3_m1oqi")])
+spawn_time_range = Array[float]([1.5, 3.0])

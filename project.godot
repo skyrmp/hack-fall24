@@ -75,3 +75,38 @@ scare={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[shader_globals]
+
+replace_dirt={
+"type": "color",
+"value": Color(0.92549, 0.772549, 0.505882, 1)
+}
+replace_dirt_detail={
+"type": "color",
+"value": Color(0.694118, 0.439216, 0.341176, 1)
+}
+dirt={
+"type": "color",
+"value": Color(0.92549, 0.772549, 0.505882, 1)
+}
+dirt_detail={
+"type": "color",
+"value": Color(0.694118, 0.439216, 0.341176, 1)
+}
+grass_inner={
+"type": "color",
+"value": Color(0.32549, 0.690196, 0.403922, 1)
+}
+grass_outer={
+"type": "color",
+"value": Color(0.180392, 0.509804, 0.388235, 1)
+}
+replace_grass_inner={
+"type": "color",
+"value": Color(0.32549, 0.690196, 0.403922, 1)
+}
+replace_grass_outer={
+"type": "color",
+"value": Color(0.180392, 0.509804, 0.388235, 1)
+}

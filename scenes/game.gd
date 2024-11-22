@@ -3,11 +3,31 @@ extends Node2D
 const CritterSpawnerScene = preload("res://scenes/critter_spawner/critter_spawner.tscn")
 const ContinueText = preload("res://title.tscn")
 
+enum Month {
+	START = -1,
+	MARCH,
+	APRIL,
+	MAY,
+	JUNE,
+	JULY,
+	AUGUST,
+	SEPTEMBER,
+	OCTOBER,
+	NOVEMBER,
+	DECEMBER,
+	JANUARY,
+	FEBRUARY,
+	END,
+}
+
+const SPRING_PALETTE: PackedColorArray = [Color("#ecc581"), Color("#b17057"), Color("#53b067"), Color("#2e8263")]
+const SUMMER_PALETTE: PackedColorArray = [Color("#e8d2ab"), Color("#d59d74"), Color("#8cbe75"), Color("#6695b0")]
+const FALL_PALETTE: PackedColorArray = [Color("#ecc581"), Color("#b17057"), Color("#ff9243"), Color("#da4c4c")]
+const WINTER_PALETTE: PackedColorArray = [Color("#a1b5c7"), Color("#859fc3"), Color("#bbd5d4"), Color("#859fc3")]
 
 @export var waves: Array[WaveData]
-@export var months: Array[String]
 
-@export var current_wave: int = -1
+@export var current_wave: Month = Month.START
 
 @export var fun_multiplier: int = 50
 
@@ -70,32 +90,35 @@ func _big_score(value: int) -> void:
 
 
 func _on_continue_clicked() -> void:
-	if current_wave == 12:
-		return
-	
+	if current_wave == Month.END: return
 	current_wave += 1
 	
-	if current_wave == 3 or current_wave == 6 or current_wave == 9 or current_wave == 12:
+	match current_wave:
+		Month.MARCH:
+			set_palette(SPRING_PALETTE)
+		Month.JUNE:
+			set_palette(SUMMER_PALETTE)
+		Month.SEPTEMBER:
+			set_palette(FALL_PALETTE)
+		Month.DECEMBER:
+			set_palette(WINTER_PALETTE)
+	
+	if current_wave % 3 == 0 and current_wave:
 		intro_animator.play_backwards("intro")
 		await intro_animator.animation_finished
 		await get_tree().create_timer(0.8).timeout
-		match current_wave:
-			3:
-				pass
-			6:
-				pass
-			9:
-				pass
-			12:
-				%Player.hide()
-				var continue_text = ContinueText.instantiate()
-				continue_text.text = "Total: " + str(points)
-				continue_text.subtext = "Click to play again!"
-				ui.add_child(continue_text)
+		
+		if current_wave == Month.END:
+			%Player.hide()
+			var continue_text = ContinueText.instantiate()
+			continue_text.text = "Total: " + str(points)
+			continue_text.subtext = "Click to play again!"
+			ui.add_child(continue_text)
+		
 		intro_animator.play("intro")
 		await intro_animator.animation_finished
 	
-	if current_wave == 12:
+	if current_wave == Month.END:
 		await GameEvents.continue_clicked
 		intro_animator.play_backwards("intro")
 		await intro_animator.animation_finished
@@ -108,7 +131,7 @@ func _on_continue_clicked() -> void:
 		get_tree().reload_current_scene()
 		return
 	
-	await month_display.display(months[current_wave])
+	await month_display.display(Month.keys()[current_wave + 1].capitalize())
 	
 	var critter_spawner = CritterSpawnerScene.instantiate()
 	critter_spawner.wave_data = waves[current_wave]
@@ -121,3 +144,10 @@ func _on_critter_scared(critter: Critter) -> void:
 		var accum: int = 2
 		points += accum * fun_multiplier
 		score_animator.play("small_score")
+
+
+func set_palette(palette: PackedColorArray) -> void:
+	RenderingServer.global_shader_parameter_set("replace_dirt", palette[0])
+	RenderingServer.global_shader_parameter_set("replace_dirt_detail", palette[1])
+	RenderingServer.global_shader_parameter_set("replace_grass_inner", palette[2])
+	RenderingServer.global_shader_parameter_set("replace_grass_outer", palette[3])
