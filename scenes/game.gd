@@ -4,6 +4,7 @@ const CritterSpawnerScene = preload("res://scenes/critter_spawner/critter_spawne
 const ContinueText = preload("res://title.tscn")
 
 
+@export var bgm: AudioStream
 @export var waves: Array[WaveData]
 @export var months: Array[String]
 
@@ -114,6 +115,8 @@ func _on_continue_clicked() -> void:
 	critter_spawner.wave_data = waves[current_wave]
 	critter_spawner.wave_finished.connect(_on_wave_finished)
 	add_child(critter_spawner)
+	
+	BackgroundMusicPlayer.play_bgm(bgm, true)
 
 
 func _on_critter_scared(critter: Critter) -> void:

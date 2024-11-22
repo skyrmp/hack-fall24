@@ -25,7 +25,12 @@ func _create_fade_tween(p_stream: AudioStream, out_time: float, wait_time: float
 	var tween = create_tween()
 	tween.tween_method(_set_volume_linear, db_to_linear(volume_db), 0.0, out_time)
 	tween.tween_interval(wait_time)
-	tween.tween_callback(func(): stream = p_stream)
+	tween.tween_callback(
+			func():
+				stop()
+				stream = p_stream
+				play()
+	)
 	tween.tween_method(_set_volume_linear, 0.0, 1.0, in_time)
 	
 	return tween
