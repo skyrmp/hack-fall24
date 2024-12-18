@@ -91,22 +91,26 @@ func _big_score(value: int) -> void:
 
 func _on_continue_clicked() -> void:
 	if current_wave == Month.END: return
+	
 	current_wave += 1
 	
-	match current_wave:
-		Month.MARCH:
-			set_palette(SPRING_PALETTE)
-		Month.JUNE:
-			set_palette(SUMMER_PALETTE)
-		Month.SEPTEMBER:
-			set_palette(FALL_PALETTE)
-		Month.DECEMBER:
-			set_palette(WINTER_PALETTE)
-	
-	if current_wave % 3 == 0 and current_wave:
+	if current_wave % 3 == 0 and current_wave > 0:
 		intro_animator.play_backwards("intro")
 		await intro_animator.animation_finished
-		await get_tree().create_timer(0.8).timeout
+		await get_tree().create_timer(0.4).timeout
+		
+		#change palettes while screen hidden by animation
+		match current_wave:
+			Month.MARCH:
+				set_palette(SPRING_PALETTE)
+			Month.JUNE:
+				set_palette(SUMMER_PALETTE)
+			Month.SEPTEMBER:
+				set_palette(FALL_PALETTE)
+			Month.DECEMBER:
+				set_palette(WINTER_PALETTE)
+		
+		await get_tree().create_timer(0.4).timeout
 		
 		if current_wave == Month.END:
 			%Player.hide()
